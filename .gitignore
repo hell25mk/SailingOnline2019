@@ -1,0 +1,41 @@
+# ---------------[ Unity generated ]------------------ #
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+UnityGenerated/
+BuildOut/
+  
+# ----[ Visual Studio / MonoDevelop generated ]------- #
+  
+.vs
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+  
+# -------------[ OS generated ]------------------------ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+ 
+#ProjectSettings.asset*
+# -------------[ Build ]------------------------ #
+#*.html
+gmcs.rsp*
+smcs.rsp*
+
+
+SailingProject_2017/.vs/SailingProject_2017/v15/Browse.VC.db
+.vs/SailingProject_2017/v15/Browse.VC.db
+Assets/Demigiant/
