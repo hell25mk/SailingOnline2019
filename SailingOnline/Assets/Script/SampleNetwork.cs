@@ -12,17 +12,21 @@ public class SampleNetwork : MonoBehaviourPunCallbacks {
         PhotonNetwork.ConnectUsingSettings();
 	}
 
+    //サーバーへ接続成功した際に呼ばれる
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
         //"room"という名前のルームに参加（なければ作成）
         PhotonNetwork.JoinOrCreateRoom("room", new RoomOptions(), TypedLobby.Default);
+        Debug.Log("ルームに参加しました");
     }
 
+    //マッチングが成功した際に呼ばれる
     public override void OnJoinedRoom()
     {
-        var v = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f);
+        var v = new Vector3(Random.Range(-15.0f, 15.0f), 0.0f, Random.Range(-15.0f, 15.0f));
         PhotonNetwork.Instantiate("GamePlayer", v, Quaternion.identity);
+        Debug.Log("プレイヤーを生成しました");
     }
 
 }
