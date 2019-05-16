@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114033932259799364}
   - component: {fileID: 114519469914357100}
   m_Layer: 0
-  m_Name: GamePlayer
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
+  m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
 --- !u!114 &114881050928456330
 MonoBehaviour:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerMove : MonoBehaviourPunCallbacks {
+public class PlayerController : MonoBehaviourPunCallbacks {
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,4 +18,5 @@ public class PlayerMove : MonoBehaviourPunCallbacks {
 
         transform.Translate(dv.x, 0.0f, dv.z);
     }
+
 }
