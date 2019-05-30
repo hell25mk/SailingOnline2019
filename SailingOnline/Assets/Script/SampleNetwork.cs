@@ -33,9 +33,9 @@ public class SampleNetwork : MonoBehaviourPunCallbacks {
     public override void OnJoinedRoom()
     {
         var vec = new Vector3(Random.Range(-15.0f, 15.0f), 0.0f, Random.Range(-15.0f, 15.0f));
-        PhotonNetwork.Instantiate("Player", vec, Quaternion.identity);
-        Debug.Log("プレイヤーを生成しました");
+        GameObject player = PhotonNetwork.Instantiate("Player", vec, Quaternion.identity);
 
+        Debug.Log("部屋に入室しました");
     }
 
 }

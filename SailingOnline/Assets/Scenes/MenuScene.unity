@@ -402,7 +402,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B9\u30BF\u30FC\u30C8"
+  m_Text: "\u30AA\u30F3\u30E9\u30A4\u30F3\u306E\u4E16\u754C\u3078"
 --- !u!222 &1427872645
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 1505575062}
   - component: {fileID: 1505575061}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ToOnline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +456,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1505575059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2e1c1c84505fa47b1911bc64a709c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2df9cd4112650e944b39ae915b5d2dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveScene: 1
@@ -500,7 +500,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1505575061}
-        m_MethodName: SceneMove
+        m_MethodName: MoveScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

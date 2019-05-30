@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TestSceneManager : MonoBehaviour {
+public class SceneMove : MonoBehaviour {
+
+    [SerializeField]
+    private eSceneList moveScene;
 
     private enum eSceneList : int
     {
@@ -11,10 +14,7 @@ public class TestSceneManager : MonoBehaviour {
         Scene_Online,
     }
 
-    [SerializeField]
-    private eSceneList moveScene;
-
-    public void SceneMove()
+	public void MoveScene()
     {
         SceneManager.LoadScene((int)moveScene);
     }
