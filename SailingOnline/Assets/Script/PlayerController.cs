@@ -32,11 +32,12 @@ public class PlayerController : MonoBehaviourPunCallbacks {
         }
 
         //ベクトルを正規化
-        var direction = new Vector3(Input.GetAxis("Horizontal"), 0.0f,Input.GetAxis("Vertical")).normalized;
+        var direction = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical")).normalized;
         //移動速度を時間依存にし、移動量を求める
         var dv = 5.0f * Time.deltaTime * direction;
 
         transform.Translate(dv.x, 0.0f, dv.z);
+        transform.Rotate(0.0f, Input.GetAxis("Horizontal"), 0.0f);
     }
 
 }

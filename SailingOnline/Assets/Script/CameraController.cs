@@ -52,6 +52,7 @@ public class CameraController : MonoBehaviour {
         Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
 
         transform.position = lookAt + rotation * dire;
+        transform.rotation = rotation;
         transform.LookAt(lookAt);
 
 	}
