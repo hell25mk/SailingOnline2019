@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             playerCamera = Camera.main;
             playerCamera.GetComponent<CameraController>().target = this.gameObject.transform;
             Debug.Log("カメラを取得しました");
-            GetComponent<MeshRenderer>().material.color = Color.blue;
+            //GetComponent<MeshRenderer>().material.color = Color.blue;
         }
     }
 
