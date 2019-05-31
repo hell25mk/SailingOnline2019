@@ -5,18 +5,22 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class SampleNetwork : MonoBehaviourPunCallbacks {
+public class SampleNetwork : MonoBehaviourPunCallbacks
+{
 
     [SerializeField]
     private Text roomNameText;
 
-	// Use this for initialization
-	private void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    //サーバーへ接続成功した際に呼ばれる
+    /// <summary>
+    /// @brief サーバーへ接続成功したらルームを探して参加する
+    /// </summary>
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -29,7 +33,9 @@ public class SampleNetwork : MonoBehaviourPunCallbacks {
         Debug.Log("ルームに参加しました");
     }
 
-    //マッチングが成功した際に呼ばれる
+    /// <summary>
+    /// @brief マッチングが成功したらプレイヤーを生成する
+    /// </summary>
     public override void OnJoinedRoom()
     {
         var vec = new Vector3(Random.Range(-15.0f, 15.0f), 0.0f, Random.Range(-15.0f, 15.0f));
