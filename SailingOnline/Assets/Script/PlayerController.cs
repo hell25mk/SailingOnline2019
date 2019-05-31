@@ -5,13 +5,13 @@ using Photon.Pun;
 
 public class PlayerController : MonoBehaviourPunCallbacks {
 
-    [SerializeField]
-    private TextMesh namePlate;
+    //[SerializeField]
+    //private TextMesh namePlate;
     private Camera playerCamera;
 
     private void Start()
     {
-        namePlate.text = "プレイヤー";
+        //namePlate.text = "プレイヤー";
         
         if (photonView.IsMine)
         {
