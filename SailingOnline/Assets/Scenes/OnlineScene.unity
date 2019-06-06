@@ -545,8 +545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cf1bdbc4681ee4b8e0c5982798d9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 4193225091108142, guid: 3dd200d38b44e4b498516264704d1e48, type: 2}
-  offset: {x: 0, y: 1, z: 0}
+  target: {fileID: 0}
+  offset: {x: 0, y: 3.5, z: -6.5}
 --- !u!81 &516970192
 AudioListener:
   m_ObjectHideFlags: 0
@@ -753,6 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929236984}
   - component: {fileID: 929236983}
+  - component: {fileID: 929236985}
   m_Layer: 0
   m_Name: WaterReflectionSceneCamera
   m_TagString: Untagged
@@ -806,13 +807,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 929236982}
-  m_LocalRotation: {x: -0.21643962, y: 0, z: 0, w: 0.976296}
-  m_LocalPosition: {x: 0, y: -7.86, z: -25}
+  m_LocalRotation: {x: -0.21405727, y: 0.22334987, z: 0.050346624, w: 0.9496102}
+  m_LocalPosition: {x: -29.53601, y: -74.01337, z: -192.8543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!45 &929236985
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929236982}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1 &1204445979
 GameObject:
   m_ObjectHideFlags: 0
