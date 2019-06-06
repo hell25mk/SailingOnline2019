@@ -7,20 +7,23 @@ public class PlayerController : MonoBehaviourPunCallbacks {
 
     //[SerializeField]
     //private TextMesh namePlate;
+    [SerializeField]
+    private GameObject mainPlayerMark;
     private Camera playerCamera;
     private bool isPlayerMove;
 
+    [System.Obsolete]
     private void Start()
     {
         //namePlate.text = "プレイヤー";
         isPlayerMove = true;
-
+        
         if (photonView.IsMine)
         {
+            mainPlayerMark.active = true;
             playerCamera = Camera.main;
             playerCamera.GetComponent<CameraController>().playerShip = this.gameObject;
             Debug.Log("カメラを取得しました");
-            //GetComponent<MeshRenderer>().material.color = Color.blue;
         }
     }
 
