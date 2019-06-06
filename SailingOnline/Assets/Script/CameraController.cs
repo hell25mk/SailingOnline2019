@@ -2,63 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
-    //カメラのy方向の角度範囲
-    /*private const float YAngle_Min = -89.0f;
-    private const float YAngle_Max = 89.0f;*/
+    public float scale;
+    public float cameraSpeed;
+    public GameObject playerShip;
+    private Vector3 prevPlayerPos;
+    private Vector3 posVector;
 
-    public Transform target;
-    //public Vector3 offset;
-    //private Vector3 lookAt;
 
-    //private float distance = 5.0f;
-    //private float minDistance = 1.0f;
-    //private float maxDistance = 20.0f;
-    //private float currentX = 0.0f;
-    //private float currentY = 0.0f;
-
-    //private float keyMoveX = 1.0f;
-
-	// Use this for initialization
-	void Start () {
-        target = null;
-	}
-	
-	// Update is called once per frame
-    void Update()
+    // Use this for initialization
+    void Start()
     {
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            currentX -= keyMoveX;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            currentX += keyMoveX;
-        }
-        */
-        //distance = Mathf.Clamp(distance, minDistance, maxDistance);
+        playerShip = null;
+        scale = 5.0f;
+        cameraSpeed = 2.0f;
+
     }
 
-	void LateUpdate () {
+    // Update is called once per frame
+    void Update()
+    {
+        prevPlayerPos = new Vector3(0.0f, 0.0f, -1.0f);
+    }
 
-        if(!target)
+    void LateUpdate()
+    {
+
+        if (!playerShip)
         {
             return;
         }
 
-        /*lookAt = target.position + offset;
-        Vector3 dire = new Vector3(0.0f, 0.0f, distance);
-        transform.position = lookAt + 0 * dire;*/
-        transform.LookAt(target);
+        Vector3 currentPlayerPos = playerShip.transform.position;
+        Vector3 backVector = (prevPlayerPos - currentPlayerPos).normalized;
 
-        /*lookAt = target.position + offset;
-        Vector3 dire = new Vector3(0.0f, 0.0f, -distance);
-        Quaternion rotation = Quaternion.Euler(-currentY, currentX, 0);
+        posVector = (backVector == Vector3.zero) ? posVector : backVector;
 
-        transform.position = lookAt + rotation * dire;
-        transform.rotation = rotation;
-        transform.LookAt(lookAt);*/
+        Vector3 targetPos = currentPlayerPos + scale * posVector;
+
+        targetPos.y = targetPos.y + 2.0f;
+
+        this.transform.position = Vector3.Lerp(
+            this.transform.position,
+            targetPos,
+            cameraSpeed * Time.deltaTime
+            );
+
+        this.transform.LookAt(playerShip.transform.position);
+        prevPlayerPos = playerShip.transform.position;
 
     }
 
