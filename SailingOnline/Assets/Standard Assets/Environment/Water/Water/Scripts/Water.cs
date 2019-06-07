@@ -37,6 +37,7 @@ namespace UnityStandardAssets.Water
         // camera. We render reflections / refractions and do other updates here.
         // Because the script executes in edit mode, reflections for the scene view
         // camera will just work!
+        [Obsolete]
         public void OnWillRenderObject()
         {
             if (!enabled || !GetComponent<Renderer>() || !GetComponent<Renderer>().sharedMaterial ||
@@ -334,6 +335,7 @@ namespace UnityStandardAssets.Water
             return waterMode;
         }
 
+        [Obsolete]
         WaterMode FindHardwareWaterSupport()
         {
             if (!SystemInfo.supportsRenderTextures || !GetComponent<Renderer>())

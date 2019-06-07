@@ -21,6 +21,8 @@ public class SampleNetwork : MonoBehaviourPunCallbacks
         var vec = new Vector3(Random.Range(-15.0f, 15.0f), 0.0f, Random.Range(-15.0f, 15.0f));
         PhotonNetwork.Instantiate("Player", vec, Quaternion.identity);
 
+        
+
         //ルーム名を追加する
         /*foreach(RoomInfo room in PhotonNetwork.GetCustomRoomList)
         {
