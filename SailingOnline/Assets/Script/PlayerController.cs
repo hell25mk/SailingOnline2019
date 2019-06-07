@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             return;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             isPlayerMove = !isPlayerMove;
         }

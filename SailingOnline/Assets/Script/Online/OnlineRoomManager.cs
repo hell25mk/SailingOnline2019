@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class OnlineRoomManager : MonoBehaviourPunCallbacks
 {
@@ -17,10 +18,24 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private eSceneList moveScene;
     [SerializeField]
-    private string roomName;
+    private Text joinRoomNameText;
+    private string joinRoomName;
 
-    public void Matchng()
+    public void Start()
     {
+        joinRoomName = "DefaultRoomName";
+    }
+
+    public void CreateRoom()
+    {
+        //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public void JoinRoom()
+    {
+        //参加ルーム名を取得する
+        joinRoomName = joinRoomNameText.text.ToString();
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -33,9 +48,10 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
 
         //"room"という名前のルームに参加（なければ作成）
-        PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(joinRoomName, new RoomOptions(), TypedLobby.Default);
 
-        Debug.Log(roomName + "という部屋に参加しました");
+        //Debug.Log(joinRoomName + "という部屋は無かったため作成しました");
+        Debug.Log(joinRoomName + "という部屋に参加しました");
     }
 
     /// <summary>
