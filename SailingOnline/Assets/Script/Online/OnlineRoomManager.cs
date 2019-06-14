@@ -12,6 +12,10 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     private eSceneList moveScene;
     [SerializeField]
     private Text roomNameText;
+    [SerializeField]
+    private GameObject menuUI;
+    [SerializeField]
+    private Text menuText;
 
     //部屋に入れる最大人数
     private const byte MaxPlayerNum = 8;
@@ -63,20 +67,23 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void RandomJoinRoom()
     {
-        Debug.Log(CreateRandomRoomID());
-        
-        /*if (!PhotonNetwork.InLobby)
-        {
-            return;
-        }
-        //適当な部屋を探す
         if (PhotonNetwork.JoinRandomRoom())
         {
-            //入れる部屋が存在しない場合部屋を作成する
-            PhotonNetwork.CreateRoom(roomName);
-            Debug.Log("ランダムルーム入室に失敗 ルームを作成します");
-        }*/
-        //Debug.Log("ランダムな部屋に入室しました");
+            Debug.Log("ランダムな部屋に入室しました");
+        }
+    }
+
+    /// <summary>
+    /// @brief 部屋の参加に失敗したときの処理
+    /// </summary>
+    /// <param name="returnCode"></param>
+    /// <param name="message"></param>
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+
+        PhotonNetwork.CreateRoom(CreateRandomRoomID());
+        Debug.Log("ランダムルーム入室に失敗 ルームを作成します");
     }
 
     /// <summary>
@@ -86,6 +93,8 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
 
+        menuUI.SetActive(true);
+        menuText.text = "オンラインモード";
         Debug.Log("マスターサーバーに接続成功しました");
     }
 
