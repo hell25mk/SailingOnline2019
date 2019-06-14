@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum eSceneList : int
 {
-    Scene_ModeMenu = 0,
+    Scene_OfflineMenu = 0,
     Scene_OnlineMenu,
-    Scene_OnlineGame,
+    Scene_OnlineMatching,
 }

@@ -12,48 +12,71 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     private eSceneList moveScene;
     [SerializeField]
     private Text roomNameText;
-    private string roomName;
+
+    //部屋に入れる最大人数
+    private const byte MaxPlayerNum = 8;
+    //ルームIDの桁数
+    private readonly byte RoomIDLength = 5;
+    //ルームID生成用
+    private const string StrRoomID = "0123456789";
 
     public void Start()
     {
-        roomName = "DefaultRoomName";
-
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    /// <summary>
+    /// @brief 部屋を作成する
+    /// </summary>
     public void CreateRoom()
     {
-        //部屋を作成する
-        if (!PhotonNetwork.CreateRoom(roomName))
+        PhotonNetwork.CreateRoom(CreateRandomRoomID());
+        /*if (!PhotonNetwork.CreateRoom(CreateRandomRoomID()))
         {
             Debug.Log("部屋の作成に失敗しました");
             return;
-        }
+        }*/
 
-        Debug.Log(roomName + "という部屋を作成しました");
+        Debug.Log("部屋を作成しました");
     }
 
+    /// <summary>
+    /// @brief 部屋に参加する
+    /// </summary>
     public void JoinRoom()
     {
-        //参加ルーム名を取得する
-        roomName = roomNameText.text.ToString();
+        //参加ルームIDを取得する
+        string id = roomNameText.text.ToString();
 
-        if (!PhotonNetwork.JoinRoom(roomName))
+        if (!PhotonNetwork.JoinRoom(id))
         {
             Debug.Log("部屋が見つかりませんでした");
             return;
         }
 
-        //Debug.Log(joinRoomName + "という部屋は無かったため作成しました");
-        Debug.Log(roomName + "という部屋に参加しました");
+        Debug.Log("ルーム" + id + "に参加しました");
     }
 
+    /// <summary>
+    /// @brief ランダムマッチを押したときの処理
+    /// </summary>
     public void RandomJoinRoom()
     {
-
-        PhotonNetwork.JoinRandomRoom();
-
+        Debug.Log(CreateRandomRoomID());
+        
+        /*if (!PhotonNetwork.InLobby)
+        {
+            return;
+        }
+        //適当な部屋を探す
+        if (PhotonNetwork.JoinRandomRoom())
+        {
+            //入れる部屋が存在しない場合部屋を作成する
+            PhotonNetwork.CreateRoom(roomName);
+            Debug.Log("ランダムルーム入室に失敗 ルームを作成します");
+        }*/
+        //Debug.Log("ランダムな部屋に入室しました");
     }
 
     /// <summary>
@@ -76,6 +99,47 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         //シーンを移動させる
         SceneManager.LoadScene((int)moveScene);
 
+    }
+
+    /// <summary>
+    /// @brief ランダムなルームIDを生成する
+    /// </summary>
+    /// <returns>ランダムなID</returns>
+    public string CreateRandomRoomID()
+    {
+
+        char[] list = new char[RoomIDLength];
+
+        for(int i = 0; i < list.Length; i++)
+        {
+            int rand = Random.Range(0, 9);
+            list[i] = StrRoomID[rand];
+            Debug.Log("[" + i + "]" + list[i]);
+        }
+
+        string roomID = new string(list);
+        Debug.Log("ルームID:" + roomID);
+
+        return roomID;
+    }
+
+    /// <summary>
+    /// @brief 部屋オプションを作成する
+    /// </summary>
+    /// <param name="vis">部屋を公開するか</param>
+    /// <param name="open">部屋に入れるかどうか</param>
+    /// <param name="mP">部屋に入れる最大人数</param>
+    /// <returns>作成したオプション</returns>
+    public RoomOptions CreateRoomOption(bool vis,bool open, byte mP = MaxPlayerNum)
+    {
+        RoomOptions option = new RoomOptions
+        {
+            MaxPlayers = mP,
+            IsVisible = vis,
+            IsOpen = open
+        };
+
+        return option;
     }
 
 }

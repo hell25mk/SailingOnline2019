@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class SampleNetwork : MonoBehaviourPunCallbacks
+public class OnlineManager : MonoBehaviourPunCallbacks
 {
 
     [SerializeField]

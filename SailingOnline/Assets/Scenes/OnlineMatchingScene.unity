@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 134467791}
   - component: {fileID: 134467792}
   m_Layer: 0
-  m_Name: PhotonNetworkTester
+  m_Name: hotonNetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1285,8 +1285,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1375995212}
-  m_LocalRotation: {x: -0.013413695, y: -0.10599382, z: 0.0014299947, w: -0.9942753}
-  m_LocalPosition: {x: -0.17098969, y: 0.6760185, z: 11.246774}
+  m_LocalRotation: {x: -0.21643962, y: 0, z: 0, w: 0.976296}
+  m_LocalPosition: {x: 0, y: -7.86, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
