@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using UnityEngine.UI;
 
@@ -17,6 +16,8 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text menuText;
 
+    private OnlineSceneManager sceneManager;
+
     //部屋に入れる最大人数
     private const byte MaxPlayerNum = 8;
     //ルームIDの桁数
@@ -28,6 +29,8 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     {
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         PhotonNetwork.ConnectUsingSettings();
+
+        sceneManager = GetComponent<OnlineSceneManager>();
     }
 
     /// <summary>
@@ -36,11 +39,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(CreateRandomRoomID());
-        /*if (!PhotonNetwork.CreateRoom(CreateRandomRoomID()))
-        {
-            Debug.Log("部屋の作成に失敗しました");
-            return;
-        }*/
 
         Debug.Log("部屋を作成しました");
     }
@@ -106,8 +104,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         //メッセージ処理の実行を一時停止
         PhotonNetwork.IsMessageQueueRunning = false;
         //シーンを移動させる
-        SceneManager.LoadScene((int)moveScene);
-
+        sceneManager.MoveScene();
     }
 
     /// <summary>

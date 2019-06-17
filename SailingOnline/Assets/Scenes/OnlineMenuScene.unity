@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 468782495}
   - component: {fileID: 468782494}
   - component: {fileID: 468782496}
+  - component: {fileID: 468782497}
   m_Layer: 0
   m_Name: OnlineManager
   m_TagString: Untagged
@@ -538,6 +539,18 @@ MonoBehaviour:
   roomInUI: {fileID: 52840581}
   backOfflineButton: {fileID: 998528338}
   backButton: {fileID: 216671450}
+--- !u!114 &468782497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468782493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d98d92caa79b74ca87b778ffb31486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveScene: 2
 --- !u!1 &555905723
 GameObject:
   m_ObjectHideFlags: 0
