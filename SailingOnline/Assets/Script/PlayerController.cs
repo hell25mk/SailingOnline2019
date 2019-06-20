@@ -5,8 +5,8 @@ using Photon.Pun;
 
 public class PlayerController : MonoBehaviourPunCallbacks {
 
-    //[SerializeField]
-    //private TextMesh namePlate;
+    [SerializeField]
+    private TextMesh namePlate;
     [SerializeField]
     private GameObject mainPlayerMark;
     private Camera playerCamera;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviourPunCallbacks {
     [System.Obsolete]
     private void Start()
     {
-        //namePlate.text = "プレイヤー";
+        namePlate.text = PhotonNetwork.NickName;
         isPlayerMove = true;
         
         if (photonView.IsMine)

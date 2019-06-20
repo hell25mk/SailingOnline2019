@@ -13,7 +13,7 @@ public class JoinRoomButton : MonoBehaviour {
     private GameObject backOfflineButton;
     [SerializeField]
     private GameObject backButton;
-    private SceneMove sceneMove;
+    private SceneMoveManager sceneMove;
 
     /// <summary>
     /// @brief [部屋に参加]を押したときの処理

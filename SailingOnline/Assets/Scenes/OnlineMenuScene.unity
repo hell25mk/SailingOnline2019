@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 468782494}
   - component: {fileID: 468782496}
   - component: {fileID: 468782497}
+  - component: {fileID: 468782498}
   m_Layer: 0
   m_Name: OnlineManager
   m_TagString: Untagged
@@ -507,7 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6574d9edb4e29e147bc0d53e89fef4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveScene: 2
   roomNameText: {fileID: 1101543832}
   menuUI: {fileID: 367184889}
   menuText: {fileID: 150278951}
@@ -548,6 +548,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26d98d92caa79b74ca87b778ffb31486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &468782498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468782493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df9cd4112650e944b39ae915b5d2dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveScene: 2

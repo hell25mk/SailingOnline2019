@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneMove : MonoBehaviour {
+public class SceneMoveManager : MonoBehaviour {
 
     [SerializeField]
     private eSceneList moveScene;
 
-	public void MoveScene()
+	public void SceneMove()
     {
         SceneManager.LoadScene((int)moveScene);
     }

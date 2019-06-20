@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 public class OnlineSceneManager : MonoBehaviourPunCallbacks
 {
 
-    [SerializeField]
-    private eSceneList moveScene;   //シーンの移動先
-
     /// <summary>
     /// @brief ゲームルームを抜ける
     /// </summary>
@@ -25,15 +22,9 @@ public class OnlineSceneManager : MonoBehaviourPunCallbacks
     {
         base.OnLeftRoom();
 
-        MoveScene();
-    }
-
-    /// <summary>
-    /// @brief シーンの切り替え
-    /// </summary>
-    public void MoveScene()
-    {
-        SceneManager.LoadScene((int)moveScene);
+        //シーンを移動させる
+        SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
+        sceneMove.SceneMove();
     }
 
 }
