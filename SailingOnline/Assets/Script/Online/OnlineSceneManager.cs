@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class OnlineSceneManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    private Text roomNameText;
+    [SerializeField]
+    private Text roomPlayerCountText;
+    private byte roomPlayerCount;
 
     /// <summary>
     /// @brief ゲームルームを抜ける
@@ -24,6 +30,18 @@ public class OnlineSceneManager : MonoBehaviourPunCallbacks
         //シーンを移動させる
         SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
         sceneMove.SceneMove();
+    }
+
+    public void SetRoomInfomation()
+    {
+        //roomNameText.text = PhotonNetwork;
+    }
+
+    public void SetPlayerCount(byte pCount)
+    {
+        roomPlayerCount += pCount;
+
+        roomPlayerCountText.text = roomPlayerCount.ToString();
     }
 
 }

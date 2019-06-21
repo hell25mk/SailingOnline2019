@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class OfflineMenuManager : MonoBehaviourPun
+public class OfflineMenuManager : MonoBehaviour
 {
 
     [SerializeField]
