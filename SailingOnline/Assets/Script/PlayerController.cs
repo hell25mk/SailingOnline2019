@@ -48,12 +48,6 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             isPlayerMove = !isPlayerMove;
         }
 
-        //一時停止 スマホ
-        if(Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            isPlayerMove = !isPlayerMove;
-        }
-
         //ベクトルを正規化
         var direction = new Vector3(0.0f, 0.0f, -(isPlayerMove ? 3.0f : 0.0f)).normalized;
         //移動速度を時間依存にし、移動量を求める
