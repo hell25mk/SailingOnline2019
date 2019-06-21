@@ -4,11 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class OfflineMenuManager : MonoBehaviourPunCallbacks
+public class OfflineMenuManager : MonoBehaviourPun
 {
 
     [SerializeField]
     private Text playerName;
+    private const string DefaultPlayerName = "Player";
+
+    public void Start()
+    {
+        //ニックネームにデフォルト値を入れる
+        PhotonNetwork.LocalPlayer.NickName = DefaultPlayerName;
+    }
 
     public void JoinOnlineLobby()
     {
@@ -22,7 +29,7 @@ public class OfflineMenuManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void SetNickName()
     {
-        PhotonNetwork.NickName = playerName.text;
+        PhotonNetwork.LocalPlayer.NickName = playerName.text;
     }
 
 }

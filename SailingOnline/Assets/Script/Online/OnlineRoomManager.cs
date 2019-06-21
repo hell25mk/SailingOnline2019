@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using Photon.Chat;
 
 public class OnlineRoomManager : MonoBehaviourPunCallbacks
 {
@@ -18,11 +17,11 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     //部屋に入れる最大人数
     private const byte MaxPlayerNum = 8;
     //ルームIDの桁数
-    private readonly byte RoomIDLength = 5;
+    private const byte RoomIDLength = 5;
     //ルームID生成用
-    private const string StrRoomID = "0123456789";
+    private const string StrListNumber = "0123456789";
 
-    public void Start()
+    void Awake()
     {
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         PhotonNetwork.ConnectUsingSettings();
@@ -113,17 +112,19 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     /// <returns>ランダムな部屋ID</returns>
     public string CreateRandomRoomID()
     {
-        char[] list = new char[RoomIDLength];
+        //使用文字が変わっていいように新しく変数を作成
+        string list = StrListNumber;
+        char[] id = new char[RoomIDLength];
 
-        for (int index = 0; index < list.Length; index++)
+        for (int index = 0; index < id.Length; index++)
         {
-            int rand = Random.Range(0, 9);
-            list[index] = StrRoomID[rand];
-            Debug.Log("[" + index + "]" + list[index]);
+            int rand = Random.Range(0, list.Length - 1);
+            id[index] = list[rand];
+            Debug.Log("[" + index + "]" + id[index]);
         }
 
         //charをstringに変換させる
-        string roomID = new string(list);
+        string roomID = new string(id);
 
         Debug.Log("ルームID:" + roomID);
 

@@ -6,23 +6,29 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks {
 
     [SerializeField]
-    private TextMesh namePlate;
+    private GameObject namePlate;
+    [SerializeField]
+    private TextMesh nameText;
     [SerializeField]
     private GameObject mainPlayerMark;
     private Camera playerCamera;
     private bool isPlayerMove;
 
-    [System.Obsolete]
     private void Start()
     {
-        namePlate.text = PhotonNetwork.NickName;
+        //プレイヤーの名前設定
+        nameText.text = photonView.Owner.NickName;
         isPlayerMove = true;
         
         if (photonView.IsMine)
         {
-            mainPlayerMark.active = true;
+            //メインプレイヤーの表示を生じする
+            mainPlayerMark.SetActive(true);
             playerCamera = Camera.main;
             playerCamera.GetComponent<CameraController>().playerShip = this.gameObject;
+            //メインプレイヤーの名前表示を消す
+            namePlate.SetActive(false);
+
             Debug.Log("カメラを取得しました");
         }
     }
@@ -36,7 +42,14 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             return;
         }
 
+        //一時停止 PC
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isPlayerMove = !isPlayerMove;
+        }
+
+        //一時停止 スマホ
+        if(Input.GetTouch(0).phase == TouchPhase.Began)
         {
             isPlayerMove = !isPlayerMove;
         }

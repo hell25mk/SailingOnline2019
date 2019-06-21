@@ -1,40 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class JoinRoomButton : MonoBehaviour {
+public class JoinRoomButton : MonoBehaviour
+{
 
     [SerializeField]
-    private GameObject modeSelectUI;
+    private GameObject mainMenuUI;
     [SerializeField]
-    private GameObject roomInUI;
-    [SerializeField]
-    private GameObject backOfflineButton;
-    [SerializeField]
-    private GameObject backButton;
-    private SceneMoveManager sceneMove;
+    private GameObject subMenuUI;
 
     /// <summary>
-    /// @brief [部屋に参加]を押したときの処理
+    /// @brief [部屋に参加]を押したとき、サブメニューを表示する
     /// </summary>
     public void OnJoinRoomButton()
     {
-        modeSelectUI.SetActive(false);
-        roomInUI.SetActive(true);
-        backOfflineButton.SetActive(false);
-        backButton.SetActive(true);
+        mainMenuUI.SetActive(false);
+        subMenuUI.SetActive(true);
     }
 
     /// <summary>
-    /// @brief [戻る]を押したときの処理
+    /// @brief [戻る]を押したとき、メインメニューを表示する
     /// </summary>
     public void OnBackButton()
     {
-        modeSelectUI.SetActive(true);
-        roomInUI.SetActive(false);
-        backOfflineButton.SetActive(true);
-        backButton.SetActive(false);
+        mainMenuUI.SetActive(true);
+        subMenuUI.SetActive(false);
     }
 
 }

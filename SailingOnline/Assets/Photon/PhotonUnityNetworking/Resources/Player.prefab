@@ -6978,7 +6978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d5ea45b2f98d8468d0a90178f46820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePlate: {fileID: 102592608614799092}
+  namePlate: {fileID: 1022408521934244}
+  nameText: {fileID: 102592608614799092}
   mainPlayerMark: {fileID: 1938221379159982}
 --- !u!114 &114923364082057116
 MonoBehaviour:

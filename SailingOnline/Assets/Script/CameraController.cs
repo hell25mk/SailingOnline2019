@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         playerShip = null;
-        scale = 6.0f;
+        scale = 8.0f;
         cameraSpeed = 2.0f;
 
     }
