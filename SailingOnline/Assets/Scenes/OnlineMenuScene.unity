@@ -216,6 +216,7 @@ Transform:
   - {fileID: 989700042}
   - {fileID: 1272049598}
   - {fileID: 311610546}
+  - {fileID: 2114351549}
   m_Father: {fileID: 1908869686}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 150278952}
   - component: {fileID: 150278951}
   m_Layer: 5
-  m_Name: State
+  m_Name: ConnectState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 509.87402, y: 340.07098}
+  m_AnchoredPosition: {x: 550, y: 340}
   m_SizeDelta: {x: 700, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &158868755
@@ -371,11 +372,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 468782496}
-        m_MethodName: OnNextUI
-        m_Mode: 1
+        m_MethodName: PuchNextUI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 311610545}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
@@ -663,6 +664,7 @@ GameObject:
   - component: {fileID: 468782494}
   - component: {fileID: 468782498}
   - component: {fileID: 468782496}
+  - component: {fileID: 468782497}
   m_Layer: 0
   m_Name: OnlineManager
   m_TagString: Untagged
@@ -681,9 +683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6574d9edb4e29e147bc0d53e89fef4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomNameText: {fileID: 646513405}
-  menuUI: {fileID: 110183902}
-  menuText: {fileID: 150278951}
 --- !u!4 &468782495
 Transform:
   m_ObjectHideFlags: 0
@@ -708,10 +707,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6209384748e72e249b3f85fce1f601c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuUI:
-  - {fileID: 989700041}
-  - {fileID: 1272049597}
-  - {fileID: 311610545}
+  mainMenuUI: {fileID: 110183902}
+  firstSubMenuUI: {fileID: 989700041}
+  connectStateText: {fileID: 150278951}
+  roomIDText: {fileID: 646513405}
+--- !u!114 &468782497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468782493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb253e48f726fe345802f4d858b55781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &468782498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,7 +1247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &989700042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2193,11 +2203,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 468782496}
-        m_MethodName: OnNextUI
-        m_Mode: 1
+        m_MethodName: PuchNextUI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1272049597}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2266,7 +2276,6 @@ RectTransform:
   m_Children:
   - {fileID: 110183903}
   - {fileID: 150278953}
-  - {fileID: 2114351549}
   m_Father: {fileID: 923430640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2304,8 +2313,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1389943862}
-  m_Father: {fileID: 1908869686}
-  m_RootOrder: 2
+  m_Father: {fileID: 110183903}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2352,7 +2361,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 468782496}
-        m_MethodName: OnBackUI
+        m_MethodName: PopPreviousUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

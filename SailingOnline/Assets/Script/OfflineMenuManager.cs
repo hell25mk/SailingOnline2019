@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * 長嶋
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +14,11 @@ public class OfflineMenuManager : MonoBehaviour
     [SerializeField]
     private Text playerName;
     private const string DefaultPlayerName = "Player";
+    SceneMoveManager sceneMove;
 
     public void Start()
     {
+        sceneMove = GetComponent<SceneMoveManager>();
         //ニックネームにデフォルト値を入れる
         PhotonNetwork.LocalPlayer.NickName = DefaultPlayerName;
     }
@@ -20,7 +26,7 @@ public class OfflineMenuManager : MonoBehaviour
     public void JoinOnlineLobby()
     {
         SetNickName();
-        SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
+        
         sceneMove.SceneMove();
     }
 

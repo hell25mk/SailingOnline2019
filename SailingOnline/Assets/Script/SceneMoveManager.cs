@@ -13,4 +13,9 @@ public class SceneMoveManager : MonoBehaviour {
         SceneManager.LoadScene((int)moveScene);
     }
 
+    public void SetMoveScene(eSceneList scene)
+    {
+        moveScene = scene;
+    }
+
 }

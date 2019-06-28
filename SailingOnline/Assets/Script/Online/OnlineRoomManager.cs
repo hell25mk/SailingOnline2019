@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * 長嶋
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,12 +11,7 @@ using Photon.Realtime;
 
 public class OnlineRoomManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private Text roomNameText;
-    [SerializeField]
-    private GameObject menuUI;
-    [SerializeField]
-    private Text menuText;
+    private OnlineMenuUIManager uiManager;
 
     //部屋に入れる最大人数
     private const byte MaxPlayerNum = 8;
@@ -21,11 +20,14 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     //ルームID生成用
     private const string StrListNumber = "0123456789";
 
-    void Awake()
+    public void Awake()
     {
         PhotonNetwork.GameVersion = "1.0";
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
     /// <summary>
@@ -58,11 +60,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void CreateRoom()
     {
-        /*if (!PhotonNetwork.InLobby)
-        {
-            return;
-        }*/
-
         PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum, false));
 
         Debug.Log("部屋を作成しました");
@@ -74,7 +71,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     public void JoinRoom()
     {
         //参加ルームIDを取得する
-        string id = roomNameText.text.ToString();
+        string id = uiManager.RoomIDText.text.ToString();
 
         if (!PhotonNetwork.JoinRoom(id))
         {
@@ -104,15 +101,15 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
 
-        menuUI.SetActive(true);
-        menuText.text = "オンラインモード";
+        uiManager = GetComponent<OnlineMenuUIManager>();
+        uiManager.Init();
 
         Debug.Log("マスターサーバーに接続成功しました");
         Debug.Log("プレイヤーネームは" + PhotonNetwork.LocalPlayer.NickName);
     }
 
     /// <summary>
-    /// @brief マッチングが成功したらプレイヤーを生成する
+    /// @brief マッチングが成功したときの処理
     /// </summary>
     public override void OnJoinedRoom()
     {

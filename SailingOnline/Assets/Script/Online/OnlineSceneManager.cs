@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/*
+ * 長嶋
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -6,8 +10,6 @@ using UnityEngine.UI;
 
 public class OnlineSceneManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private Text roomNameText;
     [SerializeField]
     private Text roomPlayerCountText;
     private byte roomPlayerCount;
