@@ -73,6 +73,13 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         //参加ルームIDを取得する
         string id = uiManager.RoomIDText.text.ToString();
 
+        //IDが正しくない場合のエラー処理
+        if (id.Length < RoomIDLength)
+        {
+            Debug.Log("IDが正しくありません");
+            return;
+        }
+
         if (!PhotonNetwork.JoinRoom(id))
         {
             Debug.Log("部屋が見つかりませんでした");

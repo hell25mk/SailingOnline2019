@@ -17,6 +17,8 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text playerCountText;
 
+    private MachPlayerManager playerManager;
+
     public void Awake()
     {
         //メッセージ処理の実行を再開する
@@ -26,6 +28,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     // Use this for initialization
     public void Start()
     {
+        playerManager = GetComponent<MachPlayerManager>();
         roomIDText.text = "ルームばんごう : " + PhotonNetwork.CurrentRoom.Name;
         UpdatePlayerCountText();
 
