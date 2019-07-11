@@ -11,41 +11,53 @@ using UnityEngine.UI;
 
 public class OnlineMachingManager : MonoBehaviourPunCallbacks
 {
-
+    [SerializeField]
+    private SceneMoveManager sceneManager;
     [SerializeField]
     private Text roomIDText;
     [SerializeField]
     private Text playerCountText;
+    [SerializeField]
+    private Button gameStartButton;
+    [SerializeField]
+    private GameObject playerIconPanel;
 
-    private MachPlayerManager playerManager;
-
-    public void Awake()
-    {
-        //メッセージ処理の実行を再開する
-        PhotonNetwork.IsMessageQueueRunning = true;
-    }
+    private const byte canStartPlayerCount = 2;
 
     // Use this for initialization
     public void Start()
     {
-        playerManager = GetComponent<MachPlayerManager>();
+        //メッセージ処理の実行を再開する
+        PhotonNetwork.IsMessageQueueRunning = true;
+
         roomIDText.text = "ルームばんごう : " + PhotonNetwork.CurrentRoom.Name;
-        UpdatePlayerCountText();
+        UpdatePlayerCount();
+        AddPlayer();
 
         Debug.Log("プレイヤー人数 : " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+
+        UpdatePlayerCount();
+
+        Debug.Log("プレイヤーが入室しましたよ");
+
+    }
+
     /// <summary>
-    /// @brief プレイヤーがルームに入室した時の処理
+    /// @brief 他プレイヤーがルームに入室した時の処理
     /// </summary>
     /// <param name="newPlayer"></param>
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
-        
-        UpdatePlayerCountText();
 
-        Debug.Log("プレイヤーが入室しました");
+        UpdatePlayerCount();
+
+        Debug.Log("プレイヤーが入室しましたwww");
     }
 
     /// <summary>
@@ -56,17 +68,59 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerLeftRoom(otherPlayer);
 
-        UpdatePlayerCountText();
+        UpdatePlayerCount();
 
         Debug.Log("プレイヤーが退室しました");
     }
 
     /// <summary>
-    /// @brief プレイヤーが現在何人入っているかのテキストを更新する
+    /// @brief ゲームルームを抜ける
     /// </summary>
-    public void UpdatePlayerCountText()
+    public void ExitGameRoom()
     {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    /// <summary>
+    /// @brief ルームを抜けた場合の処理
+    /// </summary>
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+
+        //シーンを移動させる
+        sceneManager.SceneMove();
+    }
+
+    /// <summary>
+    /// @brief プレイヤーが現在何人入っているかを更新する
+    /// </summary>
+    public void UpdatePlayerCount()
+    {
+
+        if(PhotonNetwork.CurrentRoom.PlayerCount >= canStartPlayerCount)
+        {
+            gameStartButton.interactable = true;
+            Debug.Log("ゲームスタートできます");
+        }
+        else
+        {
+            gameStartButton.interactable = false;
+            Debug.Log("ゲームスタートできません");
+        }
+
         playerCountText.text = "にんずう : " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
+
+    public void AddPlayer()
+    {
+        Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
+        GameObject playerIcon = PhotonNetwork.Instantiate("PlayerIcon", vec, Quaternion.identity);
+
+        //playerIcon.transform.SetParent(playerIconPanel.transform, false);   //子オブジェクトにする
+
+        Debug.Log("プレイヤーアイコンを生成しました");
+
     }
 
 }

@@ -22,7 +22,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
 
     public void Awake()
     {
-        PhotonNetwork.GameVersion = "1.0";
+        PhotonNetwork.GameVersion = "1.1";
         //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         if (!PhotonNetwork.IsConnected)
         {

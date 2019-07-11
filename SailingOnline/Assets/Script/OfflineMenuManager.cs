@@ -13,14 +13,12 @@ public class OfflineMenuManager : MonoBehaviour
 
     [SerializeField]
     private Text playerName;
-    private const string DefaultPlayerName = "Player";
+    private const string DefaultPlayerName = "プレイヤー";
     SceneMoveManager sceneMove;
 
     public void Start()
     {
         sceneMove = GetComponent<SceneMoveManager>();
-        //ニックネームにデフォルト値を入れる
-        PhotonNetwork.LocalPlayer.NickName = DefaultPlayerName;
     }
 
     public void JoinOnlineLobby()
@@ -35,6 +33,12 @@ public class OfflineMenuManager : MonoBehaviour
     /// </summary>
     public void SetNickName()
     {
+        //名前が付けられていない場合はデフォルト値を設定する
+        if(playerName.text == "")
+        {
+            PhotonNetwork.LocalPlayer.NickName = DefaultPlayerName;
+        }
+
         PhotonNetwork.LocalPlayer.NickName = playerName.text;
     }
 
