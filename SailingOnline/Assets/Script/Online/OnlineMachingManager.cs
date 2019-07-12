@@ -21,6 +21,8 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     private Button gameStartButton;
     [SerializeField]
     private GameObject playerIconPanel;
+    [SerializeField]
+    private List<Sprite> playerIconSpriteList;
 
     private const byte canStartPlayerCount = 2;
 
@@ -99,7 +101,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("プレイヤー人数は" + PhotonNetwork.CurrentRoom.PlayerCount);
 
-        //枠の状態を更新する
+        //パネルの状態を更新する
         for (int count = 0; count < PhotonNetwork.CurrentRoom.MaxPlayers; count++)
         {
             Image image = playerIconPanel.transform.Find("PlayerIcon" + count).transform.Find("IconImage").GetComponent<Image>();
@@ -108,20 +110,25 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
             //プレイヤーが存在する場合はニックネームを入れる
             if (count < PhotonNetwork.CurrentRoom.PlayerCount)
             {
+                image.sprite = playerIconSpriteList[count];
                 name.text = PhotonNetwork.PlayerList[count].NickName;
             }
             else
             {
+                image.sprite = playerIconSpriteList[playerIconSpriteList.Count - 1];
                 name.text = "ぼしゅうちゅう";
             }
 
 
         }
 
-        //プレイヤーの人数を確認し、一定数以上いた場合ゲームスタート可能にする
+        //プレイヤーの人数を確認し一定数以上いる且自身がマスターならばスタートボタンを押せるようにする
         if (PhotonNetwork.CurrentRoom.PlayerCount >= canStartPlayerCount)
         {
-            gameStartButton.interactable = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                gameStartButton.interactable = true;
+            }
             Debug.Log("ゲームスタートできます");
         }
         else
@@ -132,11 +139,6 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
 
         //人数のテキストを更新する
         playerCountText.text = "にんずう : " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
-
-        /*Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
-        PhotonNetwork.Instantiate("PlayerIcon", vec, Quaternion.identity);
-
-        Debug.Log("プレイヤーアイコンを生成しました");*/
 
     }
 
