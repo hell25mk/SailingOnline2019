@@ -37,6 +37,7 @@ public class OfflineMenuManager : MonoBehaviour
         if(playerName.text == "")
         {
             PhotonNetwork.LocalPlayer.NickName = DefaultPlayerName;
+            return;
         }
 
         PhotonNetwork.LocalPlayer.NickName = playerName.text;

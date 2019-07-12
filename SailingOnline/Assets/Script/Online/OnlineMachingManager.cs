@@ -31,8 +31,8 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
 
         roomIDText.text = "ルームばんごう : " + PhotonNetwork.CurrentRoom.Name;
-        UpdatePlayerCount();
-        AddPlayer();
+        UpdateMatchingPlayer();
+        UpdateMatchingPlayer();
 
         Debug.Log("プレイヤー人数 : " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
@@ -41,7 +41,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
 
-        UpdatePlayerCount();
+        UpdateMatchingPlayer();
 
         Debug.Log("プレイヤーが入室しましたよ");
 
@@ -55,7 +55,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerEnteredRoom(newPlayer);
 
-        UpdatePlayerCount();
+        UpdateMatchingPlayer();
 
         Debug.Log("プレイヤーが入室しましたwww");
     }
@@ -68,7 +68,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     {
         base.OnPlayerLeftRoom(otherPlayer);
 
-        UpdatePlayerCount();
+        UpdateMatchingPlayer();
 
         Debug.Log("プレイヤーが退室しました");
     }
@@ -93,12 +93,33 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
     }
 
     /// <summary>
-    /// @brief プレイヤーが現在何人入っているかを更新する
+    /// @brief ルームの情報を更新し、それをGUIに適用させる
     /// </summary>
-    public void UpdatePlayerCount()
+    public void UpdateMatchingPlayer()
     {
+        Debug.Log("プレイヤー人数は" + PhotonNetwork.CurrentRoom.PlayerCount);
 
-        if(PhotonNetwork.CurrentRoom.PlayerCount >= canStartPlayerCount)
+        //枠の状態を更新する
+        for (int count = 0; count < PhotonNetwork.CurrentRoom.MaxPlayers; count++)
+        {
+            Image image = playerIconPanel.transform.Find("PlayerIcon" + count).transform.Find("IconImage").GetComponent<Image>();
+            Text name = playerIconPanel.transform.Find("PlayerIcon" + count).transform.Find("NameText").GetComponent<Text>();
+
+            //プレイヤーが存在する場合はニックネームを入れる
+            if (count < PhotonNetwork.CurrentRoom.PlayerCount)
+            {
+                name.text = PhotonNetwork.PlayerList[count].NickName;
+            }
+            else
+            {
+                name.text = "ぼしゅうちゅう";
+            }
+
+
+        }
+
+        //プレイヤーの人数を確認し、一定数以上いた場合ゲームスタート可能にする
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= canStartPlayerCount)
         {
             gameStartButton.interactable = true;
             Debug.Log("ゲームスタートできます");
@@ -109,17 +130,13 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
             Debug.Log("ゲームスタートできません");
         }
 
+        //人数のテキストを更新する
         playerCountText.text = "にんずう : " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
-    }
 
-    public void AddPlayer()
-    {
-        Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
-        GameObject playerIcon = PhotonNetwork.Instantiate("PlayerIcon", vec, Quaternion.identity);
+        /*Vector3 vec = new Vector3(0.0f, 0.0f, 0.0f);
+        PhotonNetwork.Instantiate("PlayerIcon", vec, Quaternion.identity);
 
-        //playerIcon.transform.SetParent(playerIconPanel.transform, false);   //子オブジェクトにする
-
-        Debug.Log("プレイヤーアイコンを生成しました");
+        Debug.Log("プレイヤーアイコンを生成しました");*/
 
     }
 
