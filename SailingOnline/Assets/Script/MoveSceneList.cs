@@ -7,4 +7,5 @@ public enum eSceneList : int
     Scene_OfflineMenu = 0,
     Scene_OnlineMenu,
     Scene_OnlineMatching,
+    Scene_OnlineGame,
 }

@@ -9,7 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class OnlineMachingManager : MonoBehaviourPunCallbacks
+public class OnlineMatchingManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private SceneMoveManager sceneManager;
@@ -91,6 +91,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
         base.OnLeftRoom();
 
         //シーンを移動させる
+        sceneManager.SetMoveScene(eSceneList.Scene_OnlineMenu);
         sceneManager.SceneMove();
     }
 
@@ -107,7 +108,7 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
             Image image = playerIconPanel.transform.Find("PlayerIcon" + count).transform.Find("IconImage").GetComponent<Image>();
             Text name = playerIconPanel.transform.Find("PlayerIcon" + count).transform.Find("NameText").GetComponent<Text>();
 
-            //プレイヤーが存在する場合はニックネームを入れる
+            //プレイヤーが存在する場合は画像の変更とニックネームを設定する
             if (count < PhotonNetwork.CurrentRoom.PlayerCount)
             {
                 image.sprite = playerIconSpriteList[count];
@@ -139,6 +140,26 @@ public class OnlineMachingManager : MonoBehaviourPunCallbacks
 
         //人数のテキストを更新する
         playerCountText.text = "にんずう : " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
+
+    }
+
+    public void ReadyToGame()
+    {
+
+        Debug.Log("ゲームスタート準備");
+        //C#6以上ではないのでnameofが使えないため直接名前を入力している
+        //AllViaServerでは自身も通信を介して実行される
+        photonView.RPC("GameStart", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void GameStart()
+    {
+        Debug.Log("ゲームが開始されました");
+        PhotonNetwork.IsMessageQueueRunning = false;
+
+        sceneManager.SetMoveScene(eSceneList.Scene_OnlineGame);
+        sceneManager.SceneMove();
 
     }
 
