@@ -12,7 +12,6 @@ public class MatchGameStartTimer : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private Text timerText;
-
     [SerializeField]
     private float gameStartTime;
 
@@ -27,28 +26,38 @@ public class MatchGameStartTimer : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("カウントダウンしているよ");
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
-            photonView.RPC("CountDown", RpcTarget.AllViaServer);
-        }
-
-    }
-
-    [PunRPC]
-    private void CountDown()
-    {
         if (gameStartTime < 0.0f)
         {
             return;
         }
 
-        gameStartTime -= Time.deltaTime;
-        gameStartCount = (int)gameStartTime;
-        timerText.text = gameStartCount.ToString("D2");
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            CountDown();
+            photonView.RPC("SetTimerText", RpcTarget.AllViaServer, gameStartTime);
+        }
 
     }
 
     
+    public void CountDown()
+    {
+
+        gameStartTime -= Time.deltaTime;
+
+    }
+
+    [PunRPC]
+    private void SetTimerText(float count)
+    {
+        //自身がマスター出ない場合、カウントダウン変数を同期する
+        if (!PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            gameStartTime = count;
+        }
+
+        gameStartCount = (int)gameStartTime;
+        timerText.text = gameStartCount.ToString("D2");
+    }
 
 }

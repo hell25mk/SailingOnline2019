@@ -130,12 +130,10 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
             {
                 gameStartButton.interactable = true;
             }
-            Debug.Log("ゲームスタートできます");
         }
         else
         {
             gameStartButton.interactable = false;
-            Debug.Log("ゲームスタートできません");
         }
 
         //人数のテキストを更新する
@@ -143,19 +141,24 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
 
     }
 
+    /// <summary>
+    /// @brief ルーム内にいる全員のGameStart関数を呼び出す(マスターのみ)
+    /// </summary>
     public void ReadyToGame()
     {
-
-        Debug.Log("ゲームスタート準備");
+        //これ以降の部屋入室を禁止する
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         //C#6以上ではないのでnameofが使えないため直接名前を入力している
         //AllViaServerでは自身も通信を介して実行される
         photonView.RPC("GameStart", RpcTarget.AllViaServer);
     }
 
+    /// <summary>
+    /// @brief ゲームシーンに移動する
+    /// </summary>
     [PunRPC]
     private void GameStart()
     {
-        Debug.Log("ゲームが開始されました");
         PhotonNetwork.IsMessageQueueRunning = false;
 
         sceneManager.SetMoveScene(eSceneList.Scene_OnlineGame);
