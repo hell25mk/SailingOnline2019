@@ -9,15 +9,23 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
     private SceneMoveManager sceneManager;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+
         //メッセージ処理の実行を再開する
         PhotonNetwork.IsMessageQueueRunning = true;
+
+        //プレイヤーを生成する
+        Vector3 vec = new Vector3(0.0f, 0.0f);
+        PhotonNetwork.Instantiate("OnlinePlayer", vec, Quaternion.identity);
+
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     /// <summary>
     /// @brief ゲームルームを抜ける

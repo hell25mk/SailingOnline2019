@@ -7,10 +7,14 @@ public class CameraController : MonoBehaviour
 
     public float scale;
     public float cameraSpeed;
-    public GameObject playerShip;
+    private GameObject playerShip;
     private Vector3 prevPlayerPos;
     private Vector3 posVector;
 
+    public GameObject PlayerShip {
+        get { return playerShip; }
+        set { playerShip = value; }
+    }
 
     // Use this for initialization
     void Start()

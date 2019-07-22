@@ -1833,7 +1833,7 @@ GameObject:
   - component: {fileID: 114987414422789080}
   - component: {fileID: 114065475921850876}
   m_Layer: 0
-  m_Name: Player
+  m_Name: OnlinePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6978,8 +6978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d5ea45b2f98d8468d0a90178f46820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePlate: {fileID: 1022408521934244}
-  nameText: {fileID: 102592608614799092}
   mainPlayerMark: {fileID: 1938221379159982}
 --- !u!114 &114923364082057116
 MonoBehaviour:

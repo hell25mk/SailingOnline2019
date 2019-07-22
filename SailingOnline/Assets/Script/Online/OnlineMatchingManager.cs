@@ -23,7 +23,7 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     private GameObject playerIconPanel;
     [SerializeField]
     private List<Sprite> playerIconSpriteList;
-
+    [SerializeField]
     private const byte canStartPlayerCount = 2;
 
     // Use this for initialization
@@ -34,18 +34,6 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
 
         roomIDText.text = "ルームばんごう : " + PhotonNetwork.CurrentRoom.Name;
         UpdateMatchingPlayer();
-        UpdateMatchingPlayer();
-
-        Debug.Log("プレイヤー人数 : " + PhotonNetwork.CurrentRoom.PlayerCount);
-    }
-
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-
-        UpdateMatchingPlayer();
-
-        Debug.Log("プレイヤーが入室しましたよ");
 
     }
 
@@ -59,7 +47,6 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
 
         UpdateMatchingPlayer();
 
-        Debug.Log("プレイヤーが入室しましたwww");
     }
 
     /// <summary>
@@ -72,7 +59,6 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
 
         UpdateMatchingPlayer();
 
-        Debug.Log("プレイヤーが退室しました");
     }
 
     /// <summary>
@@ -80,7 +66,13 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void ExitGameRoom()
     {
+        if (!PhotonNetwork.InRoom)
+        {
+            return;
+        }
+        
         PhotonNetwork.LeaveRoom();
+        
     }
 
     /// <summary>
@@ -100,7 +92,6 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void UpdateMatchingPlayer()
     {
-        Debug.Log("プレイヤー人数は" + PhotonNetwork.CurrentRoom.PlayerCount);
 
         //パネルの状態を更新する
         for (int count = 0; count < PhotonNetwork.CurrentRoom.MaxPlayers; count++)
@@ -146,11 +137,17 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void ReadyToGame()
     {
+        if (!PhotonNetwork.InRoom)
+        {
+            return;
+        }
         //これ以降の部屋入室を禁止する
         PhotonNetwork.CurrentRoom.IsOpen = false;
+
         //C#6以上ではないのでnameofが使えないため直接名前を入力している
         //AllViaServerでは自身も通信を介して実行される
         photonView.RPC("GameStart", RpcTarget.AllViaServer);
+
     }
 
     /// <summary>
@@ -159,6 +156,7 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void GameStart()
     {
+
         PhotonNetwork.IsMessageQueueRunning = false;
 
         sceneManager.SetMoveScene(eSceneList.Scene_OnlineGame);

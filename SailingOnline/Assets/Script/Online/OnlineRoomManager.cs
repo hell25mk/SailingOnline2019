@@ -22,8 +22,9 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
 
     public void Awake()
     {
-        PhotonNetwork.GameVersion = "1.1";
-        //PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
+        //ゲームバージョンを設定する
+        PhotonNetwork.GameVersion = "1.0";
+        //Photonに接続してない場合、PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();
@@ -35,10 +36,9 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void RandomJoinRoom()
     {
-        if (PhotonNetwork.JoinRandomRoom())
-        {
-            Debug.Log("ランダムな部屋に入室しました");
-        }
+
+        PhotonNetwork.JoinRandomRoom();
+
     }
 
     /// <summary>
@@ -52,7 +52,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum));
 
-        Debug.Log("ランダムルーム入室に失敗 ルームを作成します");
     }
 
     /// <summary>
@@ -60,9 +59,9 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void CreateRoom()
     {
+
         PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum, false));
 
-        Debug.Log("部屋を作成しました");
     }
 
     /// <summary>
@@ -76,17 +75,14 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         //IDが正しくない場合のエラー処理
         if (id.Length < RoomIDLength)
         {
-            Debug.Log("IDが正しくありません");
             return;
         }
 
         if (!PhotonNetwork.JoinRoom(id))
         {
-            Debug.Log("部屋が見つかりませんでした");
             return;
         }
 
-        Debug.Log("ルーム" + id + "に参加しました");
     }
 
     /// <summary>
@@ -98,7 +94,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinRoomFailed(returnCode, message);
 
-        Debug.Log("部屋の入室に失敗しました");
     }
 
     /// <summary>
@@ -111,8 +106,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         uiManager = GetComponent<OnlineMenuUIManager>();
         uiManager.Init();
 
-        Debug.Log("マスターサーバーに接続成功しました");
-        Debug.Log("プレイヤーネームは" + PhotonNetwork.LocalPlayer.NickName);
     }
 
     /// <summary>
@@ -142,7 +135,6 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         {
             int rand = Random.Range(0, list.Length - 1);
             id[index] = list[rand];
-            Debug.Log("[" + index + "]" + id[index]);
         }
 
         //charをstringに変換させる

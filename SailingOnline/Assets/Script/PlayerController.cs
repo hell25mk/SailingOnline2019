@@ -6,28 +6,20 @@ using Photon.Pun;
 public class PlayerController : MonoBehaviourPunCallbacks {
 
     [SerializeField]
-    private GameObject namePlate;
-    [SerializeField]
-    private TextMesh nameText;
-    [SerializeField]
     private GameObject mainPlayerMark;
     private Camera playerCamera;
     private bool isPlayerMove;
 
     private void Start()
     {
-        //プレイヤーの名前設定
-        nameText.text = photonView.Owner.NickName;
         isPlayerMove = true;
         
         if (photonView.IsMine)
         {
-            //メインプレイヤーの表示を生じする
+            //メインプレイヤーのマークを表示する
             mainPlayerMark.SetActive(true);
             playerCamera = Camera.main;
-            playerCamera.GetComponent<CameraController>().playerShip = this.gameObject;
-            //メインプレイヤーの名前表示を消す
-            namePlate.SetActive(false);
+            playerCamera.GetComponent<CameraController>().PlayerShip = this.gameObject;
 
             Debug.Log("カメラを取得しました");
         }
