@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 targetPos = currentPlayerPos + scale * posVector;
 
-        targetPos.y = targetPos.y + 5.0f;
+        targetPos.y = targetPos.y + 3.0f;
 
         this.transform.position = Vector3.Lerp(
             this.transform.position,
