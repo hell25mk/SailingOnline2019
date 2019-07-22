@@ -16,24 +16,18 @@ public class CameraController : MonoBehaviour
         set { playerShip = value; }
     }
 
-    // Use this for initialization
     void Start()
     {
         playerShip = null;
-        scale = 8.0f;
-        cameraSpeed = 2.0f;
+        scale = 3.0f;
+        cameraSpeed = 1.0f;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         prevPlayerPos = new Vector3(0.0f, 0.0f, -1.0f);
     }
 
-    void LateUpdate()
-    {
 
+    void Update()
+    {
         if (!playerShip)
         {
             return;
@@ -46,7 +40,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 targetPos = currentPlayerPos + scale * posVector;
 
-        targetPos.y = targetPos.y + 3.0f;
+        targetPos.y = targetPos.y + 5.0f;
 
         this.transform.position = Vector3.Lerp(
             this.transform.position,
@@ -58,5 +52,4 @@ public class CameraController : MonoBehaviour
         prevPlayerPos = playerShip.transform.position;
 
     }
-
 }

@@ -1832,6 +1832,7 @@ GameObject:
   - component: {fileID: 114923364082057116}
   - component: {fileID: 114987414422789080}
   - component: {fileID: 114065475921850876}
+  - component: {fileID: 114647882963590030}
   m_Layer: 0
   m_Name: OnlinePlayer
   m_TagString: Untagged
@@ -6979,6 +6980,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainPlayerMark: {fileID: 1938221379159982}
+--- !u!114 &114647882963590030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570528347281702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246613f777baf424ab4c7a6995479abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114923364082057116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6998,7 +7010,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114987414422789080}
   viewIdField: 0
-  InstantiationId: 1
+  InstantiationId: 2
   isRuntimeInstantiated: 0
 --- !u!114 &114987414422789080
 MonoBehaviour:
