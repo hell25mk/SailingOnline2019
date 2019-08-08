@@ -29,6 +29,17 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     // Use this for initialization
     public void Start()
     {
+
+        //Photonに接続していなかった場合は強制的にタイトルへ移動させる
+        if (!PhotonNetwork.IsConnected)
+        {
+            Debug.Log("Photonに接続していません。タイトルに戻ります");
+
+            sceneManager.SetMoveScene(eSceneList.Scene_OfflineMenu);
+            sceneManager.SceneMove();
+            return;
+        }
+
         //メッセージ処理の実行を再開する
         PhotonNetwork.IsMessageQueueRunning = true;
 
