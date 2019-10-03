@@ -5,7 +5,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -22,6 +21,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
 
     public void Awake()
     {
+
         //ゲームバージョンを設定する
         PhotonNetwork.GameVersion = "1.0";
         //Photonに接続してない場合、PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
@@ -29,6 +29,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.ConnectUsingSettings();
         }
+
     }
 
     /// <summary>
@@ -72,14 +73,17 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
         //参加ルームIDを取得する
         string id = uiManager.RoomIDText.text.ToString();
 
-        //IDが正しくない場合のエラー処理
+        //IDが正しくない場合の処理(InputFieldで数字のみに制限しているので文字数のみで判断)
         if (id.Length < RoomIDLength)
         {
+            Debug.LogWarning("IDが正しくありません");
             return;
         }
 
+        //部屋が見つからなかったときの処理
         if (!PhotonNetwork.JoinRoom(id))
         {
+            Debug.LogWarning("部屋が見つかりませんでした");
             return;
         }
 
@@ -115,7 +119,7 @@ public class OnlineRoomManager : MonoBehaviourPunCallbacks
     {
         //メッセージ処理の実行を一時停止
         PhotonNetwork.IsMessageQueueRunning = false;
-
+        
         //シーンを移動させる
         SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
         sceneMove.SceneMove();

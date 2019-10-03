@@ -5,29 +5,53 @@ using Photon.Pun;
 
 public class OnlineGameManager : MonoBehaviourPunCallbacks
 {
+
     [SerializeField]
     private SceneMoveManager sceneManager;
+    [SerializeField]
+    private GameObject shipSpawnPoint;
 
-    // Use this for initialization
-    void Start()
+    private const string playerPrefabName = "OnlinePlayer";
+    //各船の出現位置
+    /*private Vector3[] spawnPoint =
+    {
+        new Vector3(-20.0f,0.0f,0.0f),
+        new Vector3(-15.0f,0.0f,0.0f),
+        new Vector3(-10.0f,0.0f,0.0f),
+        new Vector3(-5.0f,0.0f,0.0f),
+        new Vector3(5.0f,0.0f,0.0f),
+        new Vector3(10.0f,0.0f,0.0f),
+        new Vector3(15.0f,0.0f,0.0f),
+        new Vector3(20.0f,0.0f,0.0f),
+    };*/
+
+    public void Awake()
     {
 
         //Photonに接続していなかった場合は強制的にタイトルへ移動させる
         if (!PhotonNetwork.IsConnected)
         {
-            Debug.Log("Photonに接続していません。タイトルに戻ります");
+            Debug.LogError("Photonに接続していません。タイトルに戻ります");
 
             sceneManager.SetMoveScene(eSceneList.Scene_OfflineMenu);
             sceneManager.SceneMove();
             return;
         }
 
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
         //メッセージ処理の実行を再開する
         PhotonNetwork.IsMessageQueueRunning = true;
 
         //プレイヤーを生成する
-        Vector3 vec = new Vector3(0.0f, 0.0f);
-        PhotonNetwork.Instantiate("OnlinePlayer", vec, Quaternion.identity);
+        Vector3 spawnVector = new Vector3(Random.Range(-5.0f, 5.0f), 0.0f, Random.Range(-5.0f, 5.0f)) + shipSpawnPoint.transform.localPosition;
+        PhotonNetwork.Instantiate(playerPrefabName, spawnVector, Quaternion.identity);
+
+        //PhotonNetwork.Instantiate(playerPrefabName, spawnPoint[0], Quaternion.identity);
 
     }
 

@@ -163,7 +163,6 @@ GameObject:
   m_Component:
   - component: {fileID: 134467791}
   - component: {fileID: 134467793}
-  - component: {fileID: 134467794}
   - component: {fileID: 134467792}
   m_Layer: 0
   m_Name: MatchingManager
@@ -193,12 +192,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 134467790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 0
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 1
+  InstantiationId: 1
+  isRuntimeInstantiated: 0
 --- !u!114 &134467793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,28 +231,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 023787d795a8b164abd82380a1e630d3, type: 3}
   - {fileID: 21300000, guid: 63c93f60d5021554a83d02113b296215, type: 3}
   - {fileID: 0}
-  timerObject: {fileID: 1237936833}
---- !u!114 &134467794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 134467790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 134467792}
-  viewIdField: 2
-  InstantiationId: 2
-  isRuntimeInstantiated: 0
 --- !u!1001 &148685980
 Prefab:
   m_ObjectHideFlags: 0
@@ -1528,7 +1512,6 @@ GameObject:
   - component: {fileID: 1237936834}
   - component: {fileID: 1237936838}
   - component: {fileID: 1237936837}
-  - component: {fileID: 1237936836}
   - component: {fileID: 1237936835}
   m_Layer: 5
   m_Name: MatchingTimerText
@@ -1569,27 +1552,6 @@ MonoBehaviour:
   timerText: {fileID: 1237936837}
   gameStartTime: 30
   matchingManagerObject: {fileID: 134467790}
---- !u!114 &1237936836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1237936833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 1
-  InstantiationId: 1
-  isRuntimeInstantiated: 0
 --- !u!114 &1237936837
 MonoBehaviour:
   m_ObjectHideFlags: 0

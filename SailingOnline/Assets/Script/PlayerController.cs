@@ -10,9 +10,14 @@ public class PlayerController : MonoBehaviourPunCallbacks {
     private Camera playerCamera;
     private bool isPlayerMove;
 
+    public bool IsPlayerMove {
+        get { return isPlayerMove; }
+        set { isPlayerMove = value; }
+    }
+
     private void Start()
     {
-        isPlayerMove = true;
+        isPlayerMove = false;
         
         if (photonView.IsMine)
         {
@@ -20,8 +25,6 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             mainPlayerMark.SetActive(true);
             playerCamera = Camera.main;
             playerCamera.GetComponent<CameraController>().PlayerShip = this.gameObject;
-
-            Debug.Log("カメラを取得しました");
         }
     }
 
@@ -40,6 +43,16 @@ public class PlayerController : MonoBehaviourPunCallbacks {
             isPlayerMove = !isPlayerMove;
         }
 
+        if (isPlayerMove)
+        {
+            Move();
+        }
+
+    }
+
+    private void Move()
+    {
+
         //ベクトルを正規化
         var direction = new Vector3(0.0f, 0.0f, -(isPlayerMove ? 3.0f : 0.0f)).normalized;
         //移動速度を時間依存にし、移動量を求める
@@ -47,6 +60,7 @@ public class PlayerController : MonoBehaviourPunCallbacks {
 
         transform.Translate(dv.x, 0.0f, dv.z);
         transform.Rotate(0.0f, Input.GetAxis("Horizontal"), 0.0f);
+
     }
 
 }

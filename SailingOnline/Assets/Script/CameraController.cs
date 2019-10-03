@@ -19,10 +19,11 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         playerShip = null;
-        scale = 3.0f;
+        scale = 5.0f;
         cameraSpeed = 1.0f;
 
-        prevPlayerPos = new Vector3(0.0f, 0.0f, -1.0f);
+        prevPlayerPos = new Vector3(-5.0f, 1.0f, -5.0f);
+
     }
 
 
@@ -52,4 +53,5 @@ public class CameraController : MonoBehaviour
         prevPlayerPos = playerShip.transform.position;
 
     }
+
 }

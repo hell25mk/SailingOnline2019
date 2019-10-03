@@ -24,21 +24,26 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private List<Sprite> playerIconSpriteList;
     [SerializeField]
-    private const byte canStartPlayerCount = 2;
+    private const byte canStartPlayerCount = 1;
 
-    // Use this for initialization
-    public void Start()
+    public void Awake()
     {
 
         //Photonに接続していなかった場合は強制的にタイトルへ移動させる
         if (!PhotonNetwork.IsConnected)
         {
-            Debug.Log("Photonに接続していません。タイトルに戻ります");
+            Debug.LogError("Photonに接続していません。タイトルに戻ります");
 
             sceneManager.SetMoveScene(eSceneList.Scene_OfflineMenu);
             sceneManager.SceneMove();
             return;
         }
+
+    }
+
+    // Use this for initialization
+    public void Start()
+    {
 
         //メッセージ処理の実行を再開する
         PhotonNetwork.IsMessageQueueRunning = true;
@@ -55,7 +60,7 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
-
+        
         UpdateMatchingPlayer();
 
     }
@@ -144,27 +149,28 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
     }
 
     /// <summary>
-    /// @brief ルーム内にいる全員のGameStart関数を呼び出す(マスターのみ)
+    /// @brief ルーム内にいる全員のGameStart関数を呼び出す
     /// </summary>
     public void ReadyToGame()
     {
+
         if (!PhotonNetwork.InRoom)
         {
             return;
         }
+
         //これ以降の部屋入室を禁止する
         PhotonNetwork.CurrentRoom.IsOpen = false;
 
-        //C#6以上ではないのでnameofが使えないため直接名前を入力している
-        //AllViaServerでは自身も通信を介して実行される
-        photonView.RPC("GameStart", RpcTarget.AllViaServer);
+        //GameStart();
 
+        photonView.RPC("RpcGameStart", RpcTarget.AllViaServer);
+        
     }
 
     /// <summary>
-    /// @brief ゲームシーンに移動する
+    /// @brief ゲームを開始するためシーンを切り替える
     /// </summary>
-    [PunRPC]
     private void GameStart()
     {
 
@@ -173,6 +179,15 @@ public class OnlineMatchingManager : MonoBehaviourPunCallbacks
         sceneManager.SetMoveScene(eSceneList.Scene_OnlineGame);
         sceneManager.SceneMove();
 
+    }
+
+    [PunRPC]
+    private void RpcGameStart()
+    {
+        PhotonNetwork.IsMessageQueueRunning = false;
+
+        sceneManager.SetMoveScene(eSceneList.Scene_OnlineGame);
+        sceneManager.SceneMove();
     }
 
 }

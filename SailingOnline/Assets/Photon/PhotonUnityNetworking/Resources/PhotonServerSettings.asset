@@ -23,10 +23,10 @@ MonoBehaviour:
     Protocol: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  StartInOfflineMode: 0
   PunLogging: 0
   EnableSupportLogger: 1
   RunInBackground: 1
+  StartInOfflineMode: 0
   RpcList:
   - DestroySpaceship
   - Fire
@@ -34,5 +34,8 @@ MonoBehaviour:
   - GameStart
   - CountDown
   - SetTimerText
+  - RpcGameStart
+  - ClickRpc
+  - DestroyRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1

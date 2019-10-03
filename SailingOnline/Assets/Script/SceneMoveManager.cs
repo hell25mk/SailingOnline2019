@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum ESceneList : int
+{
+    Scene_OfflineMenu = 0,
+    Scene_OnlineMenu,
+    Scene_OnlineMatching,
+    Scene_OnlineGame,
+}
+
 public class SceneMoveManager : MonoBehaviour {
 
     [SerializeField]

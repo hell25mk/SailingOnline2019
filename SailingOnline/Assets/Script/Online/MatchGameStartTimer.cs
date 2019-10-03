@@ -19,7 +19,8 @@ public class MatchGameStartTimer : MonoBehaviourPunCallbacks
     private GameObject matchingManagerObject;
     private OnlineMatchingManager matchingManager;
 
-    private int gameStartCount;
+    private double gameStartCount;
+    private float leftCountTime;
     private const byte canStartPlayerCount = 2;
 
     private bool isLimitTimeOver;
@@ -31,6 +32,16 @@ public class MatchGameStartTimer : MonoBehaviourPunCallbacks
         isLimitTimeOver = false;
         matchingManager = matchingManagerObject.GetComponent<OnlineMatchingManager>();
 
+        //自身がマスターの場合、カスタムプロパティにスタートまでの時間をセットする
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //GameStartCountというプロパティに設定
+            var properties = new ExitGames.Client.Photon.Hashtable();
+            properties.Add("GameStartCount", PhotonNetwork.Time);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+        }
+
+        gameStartCount = (double)PhotonNetwork.CurrentRoom.CustomProperties ["GameStartCount"];
     }
 
     // Update is called once per frame
@@ -43,41 +54,18 @@ public class MatchGameStartTimer : MonoBehaviourPunCallbacks
         }
 
         //制限時間を過ぎた場合
-        if (gameStartTime < 0.0f)
+        if (leftCountTime < 0.0f)
         {
             isLimitTimeOver = true;
             TimeOver();
             return;
         }
 
-        //ルームマスターならカウントダウンを進める
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
-            gameStartTime -= Time.deltaTime;
+        double elapsedTime = PhotonNetwork.Time - gameStartCount;
+        leftCountTime = gameStartTime - (float)elapsedTime;
+        //小数点を切り上げて数値合わせしている
+        timerText.text = Mathf.Ceil(leftCountTime).ToString("00");
 
-            if (PhotonNetwork.InRoom)
-            {
-                photonView.RPC("SetTimerText", RpcTarget.AllViaServer, gameStartTime);
-            }
-        }
-
-    }
-
-    /// <summary>
-    /// @brief 現在の制限時間を全員のテキストに表示する
-    /// </summary>
-    /// <param name="count">経過後の時間</param>
-    [PunRPC]
-    private void SetTimerText(float count)
-    {
-        //自身がマスター出ない場合、カウントダウン変数を同期する
-        if (!PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
-            gameStartTime = count;
-        }
-
-        gameStartCount = (int)gameStartTime;
-        timerText.text = gameStartCount.ToString("D2");
     }
 
     /// <summary>
