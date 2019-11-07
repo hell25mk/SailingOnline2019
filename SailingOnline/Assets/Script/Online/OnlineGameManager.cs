@@ -1,7 +1,16 @@
-﻿using System.Collections;
+﻿/*
+ 長嶋
+ */
+
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using Photon.Pun;
+
+using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class OnlineGameManager : MonoBehaviourPunCallbacks
 {
@@ -12,18 +21,6 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
     private GameObject shipSpawnPoint;
 
     private const string playerPrefabName = "OnlinePlayer";
-    //各船の出現位置
-    /*private Vector3[] spawnPoint =
-    {
-        new Vector3(-20.0f,0.0f,0.0f),
-        new Vector3(-15.0f,0.0f,0.0f),
-        new Vector3(-10.0f,0.0f,0.0f),
-        new Vector3(-5.0f,0.0f,0.0f),
-        new Vector3(5.0f,0.0f,0.0f),
-        new Vector3(10.0f,0.0f,0.0f),
-        new Vector3(15.0f,0.0f,0.0f),
-        new Vector3(20.0f,0.0f,0.0f),
-    };*/
 
     public void Awake()
     {
@@ -47,17 +44,23 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
         //メッセージ処理の実行を再開する
         PhotonNetwork.IsMessageQueueRunning = true;
 
-        //プレイヤーを生成する
-        Vector3 spawnVector = new Vector3(Random.Range(-5.0f, 5.0f), 0.0f, Random.Range(-5.0f, 5.0f)) + shipSpawnPoint.transform.localPosition;
-        PhotonNetwork.Instantiate(playerPrefabName, spawnVector, Quaternion.identity);
-
-        //PhotonNetwork.Instantiate(playerPrefabName, spawnPoint[0], Quaternion.identity);
+        SpawnPlayer();
 
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// @brief プレイヤーを生成する
+    /// </summary>
+    public void SpawnPlayer()
     {
+
+        Vector3 start = shipSpawnPoint.transform.localPosition;
+        float x = 2.0f * PhotonNetwork.LocalPlayer.ActorNumber;
+        float z = 1.0f * PhotonNetwork.LocalPlayer.ActorNumber;
+        Debug.Log("ナンバー : " + PhotonNetwork.LocalPlayer.ActorNumber);
+        Vector3 spawnVector = new Vector3(x + start.x, start.y, start.z);
+        
+        PhotonNetwork.Instantiate(playerPrefabName, spawnVector, Quaternion.identity);
 
     }
 
@@ -66,7 +69,9 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
     /// </summary>
     public void ExitGameRoom()
     {
+
         PhotonNetwork.LeaveRoom();
+
     }
 
     /// <summary>
@@ -79,6 +84,7 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
         //シーンを移動させる
         sceneManager.SetMoveScene(eSceneList.Scene_OnlineMenu);
         sceneManager.SceneMove();
+
     }
 
 }
