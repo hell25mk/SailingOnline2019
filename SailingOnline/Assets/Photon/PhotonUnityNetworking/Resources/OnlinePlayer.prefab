@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 4133973917259750}
   - component: {fileID: 23755238204034664}
   - component: {fileID: 102592608614799092}
+  - component: {fileID: 114643418185851562}
   m_Layer: 0
   m_Name: PlayerNameText
   m_TagString: Untagged
@@ -1835,6 +1836,7 @@ GameObject:
   - component: {fileID: 114987414422789080}
   - component: {fileID: 114065475921850876}
   - component: {fileID: 114647882963590030}
+  - component: {fileID: 114315072073668616}
   m_Layer: 0
   m_Name: OnlinePlayer
   m_TagString: Untagged
@@ -6996,6 +6998,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainPlayerMark: {fileID: 1938221379159982}
+--- !u!114 &114315072073668616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570528347281702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876babee6694d5844978c86982a02849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: {fileID: 1022408521934244}
+--- !u!114 &114643418185851562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1022408521934244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4b0d9f6a375244a8151b2fdf2d3d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114647882963590030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7025,7 +7050,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114987414422789080}
-  viewIdField: 0
+  viewIdField: 2
   InstantiationId: 1
   isRuntimeInstantiated: 0
 --- !u!114 &114987414422789080
