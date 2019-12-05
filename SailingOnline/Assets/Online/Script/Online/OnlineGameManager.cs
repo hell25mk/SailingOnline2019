@@ -61,7 +61,7 @@ public class OnlineGameManager : MonoBehaviourPunCallbacks
         Vector3 spawnVector = new Vector3(x + start.x, start.y, start.z);
         
         PhotonNetwork.Instantiate(playerPrefabName, spawnVector, Quaternion.identity);
-
+        
     }
 
     /// <summary>
