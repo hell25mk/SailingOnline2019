@@ -37,5 +37,6 @@ MonoBehaviour:
   - RpcGameStart
   - ClickRpc
   - DestroyRpc
+  - Test
   DisableAutoOpenWizard: 1
   ShowSettings: 1
