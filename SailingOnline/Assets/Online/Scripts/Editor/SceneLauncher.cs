@@ -37,29 +37,29 @@ namespace Online.Editor
         public static void OpenTitleScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameList.OnlineTitleScene), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineTitleScene), OpenSceneMode.Single);
 
         }
 
         /// <summary>
         /// @brief MenuSceneを押された際、メニューシーンへ移動する
         /// </summary>
-        [MenuItem(MenuName + "MenuScene")]
+        [MenuItem(MenuName + "LobbyScene")]
         public static void OpenMenuScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameList.OnlineMenuScene), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineLobbyScene), OpenSceneMode.Single);
 
         }
 
         /// <summary>
         /// @brief MenuSceneを押された際、マッチングシーンへ移動する
         /// </summary>
-        [MenuItem(MenuName + "MenuScene")]
+        [MenuItem(MenuName + "MatchingScene")]
         public static void OpenMatchingScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameList.OnlineMatchingScene), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineMatchingScene), OpenSceneMode.Single);
 
         }
 
@@ -70,7 +70,7 @@ namespace Online.Editor
         public static void OpenGameScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameList.OnlineGameScene), OpenSceneMode.Single);
+            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineGameScene), OpenSceneMode.Single);
 
         }
 

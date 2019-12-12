@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Online/Scenes/OfflineModeMenuScene.unity
+    path: Assets/Online/Scenes/OnlineTitleScene.unity
     guid: 3a7634bfdfc33574cb7b27c12d325c01
   - enabled: 1
-    path: Assets/Online/Scenes/OnlineMenuScene.unity
+    path: Assets/Online/Scenes/OnlineLobbyScene.unity
     guid: 9eae75fc55ca3b54096b788fd90f25e0
   - enabled: 1
     path: Assets/Online/Scenes/OnlineMatchingScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Online/Scenes/OnlineTestGameRoom.unity
+    path: Assets/Online/Scenes/OnlineGameScene.unity
     guid: 17030a8a3b387c54e946e10360f6b07d
   m_configObjects: {}

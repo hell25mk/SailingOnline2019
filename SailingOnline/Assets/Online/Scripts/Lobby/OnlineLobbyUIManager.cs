@@ -17,7 +17,7 @@ namespace Online.Lobby
         Menu_RoomSearch
     }
 
-    public class OnlineMenuUIManager : MonoBehaviour
+    public class OnlineLobbyUIManager : MonoBehaviour
     {
         [SerializeField]
         private GameObject mainMenuUI;              //MenuをまとめたUI

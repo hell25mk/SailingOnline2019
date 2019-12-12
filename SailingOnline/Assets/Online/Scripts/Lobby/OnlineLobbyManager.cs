@@ -13,7 +13,7 @@ namespace Online.Lobby
 
     public class OnlineLobbyManager : MonoBehaviourPunCallbacks
     {
-        private OnlineMenuUIManager uiManager;
+        private OnlineLobbyUIManager uiManager;
 
         //部屋に入れる最大人数
         private const byte MaxPlayerNum = 8;
@@ -26,7 +26,7 @@ namespace Online.Lobby
         {
 
             //ゲームバージョンを設定する
-            PhotonNetwork.GameVersion = "1.0";
+            PhotonNetwork.GameVersion = "1.0.0";
             //Photonに接続してない場合、PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
             if (!PhotonNetwork.IsConnected)
             {
@@ -110,7 +110,7 @@ namespace Online.Lobby
         {
             base.OnConnectedToMaster();
 
-            uiManager = GetComponent<OnlineMenuUIManager>();
+            uiManager = GetComponent<OnlineLobbyUIManager>();
             uiManager.Init();
 
         }

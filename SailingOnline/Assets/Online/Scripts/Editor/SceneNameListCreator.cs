@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 長嶋
+ * 
+ * 下記サイトを参考にして作成しました
+ * http://baba-s.hatenablog.com/entry/2014/02/24/000000_1
+ * 
+ */
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,7 +17,7 @@ namespace Online.Editor
 {
 
     /// <summary>
-    /// @brief シーン名を定数で管理するくらすを作成するクラス
+    /// @brief シーン名を定数で管理するクラスを作成するクラス
     /// </summary>
     public static class SceneNameListCreator
     {
@@ -27,18 +35,22 @@ namespace Online.Editor
         };
 
         //プルダウンメニューにつける名前
-        private const string MenuName = "Online/Create/";
+        private const string MenuName = "Online/Create Scripts/Scene Name List";
         //ファイルパス
-        private const string FilePass = "Assets/Online/Scripts/Scene/SceneNameList.cs";
+        private const string FilePass = "Assets/Online/Scripts/Editor/Scene/SceneNameList.cs";
+
+        //作成するクラス名
+        //private const string ClassName_Enum = "SceneNameEnum";
+        private const string ClassName_String = "SceneNameString";
 
         //ファイル名（上が拡張子あり）
         private static readonly string FileName = Path.GetFileName(FilePass);
-        private static readonly string FileName_Without_Extension = Path.GetFileNameWithoutExtension(FilePass);
+        //private static readonly string FileName_Without_Extension = Path.GetFileNameWithoutExtension(FilePass);
 
         /// <summary>
         /// @brief シーン名を定数で管理するクラスを作成する
         /// </summary>
-        [MenuItem(MenuName + "Scene Name List",priority = 0)]
+        [MenuItem(MenuName, priority = 0)]
         public static void Create()
         {
 
@@ -57,7 +69,7 @@ namespace Online.Editor
         /// @brief シーン名を定数で管理するクラスを作成できるかどうかを返す
         /// </summary>
         /// <returns>作成できる場合true、できなければfalseを返す</returns>
-        [MenuItem(MenuName + "Scene Name List", true)]
+        [MenuItem(MenuName, true)]
         public static bool CanCreate()
         {
 
@@ -76,11 +88,35 @@ namespace Online.Editor
             builder.AppendLine("namespace Online.Editor");
             builder.AppendLine("{\n");
 
+            #region Enum型の管理クラスを作成
+
+            //クラス部分の挿入
+            /*builder.AppendLine("\t/// <summary>");
+            builder.AppendLine("\t/// @brief シーン名をEnum型で管理するクラス");
+            builder.AppendLine("\t/// <summary>");
+            builder.AppendFormat("\tpublic enum {0}", ClassName_Enum).AppendLine();
+            builder.AppendLine("\t{\n");
+
+            //定数部分の挿入
+            foreach (var n in EditorBuildSettings.scenes
+                .Select(c => Path.GetFileNameWithoutExtension(c.path))
+                .Distinct()
+                .Select(c => new { var = RemoveInvalidChars(c), val = c }))
+            {
+                builder.Append("\t\t").AppendFormat(@"{0},", n.var).AppendLine();
+            }
+
+            builder.AppendLine("\n\t}\n");*/
+
+            #endregion
+
+            #region String型の管理クラスを作成
+
             //クラス部分の挿入
             builder.AppendLine("\t/// <summary>");
-            builder.AppendLine("\t/// @brief シーン名を定数で管理するクラス");
+            builder.AppendLine("\t/// @brief シーン名をstring型で管理するクラス");
             builder.AppendLine("\t/// <summary>");
-            builder.AppendFormat("\tpublic static class {0}", FileName_Without_Extension).AppendLine();
+            builder.AppendFormat("\tpublic static class {0}", ClassName_String).AppendLine();
             builder.AppendLine("\t{\n");
 
             //定数部分の挿入
@@ -93,6 +129,10 @@ namespace Online.Editor
             }
 
             builder.AppendLine("\n\t}\n");
+
+            #endregion
+
+            //namespaceの終了
             builder.AppendLine("}");
 
             var directoryName = Path.GetDirectoryName(FilePass);

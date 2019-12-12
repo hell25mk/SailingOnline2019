@@ -2,13 +2,13 @@
 {
 
 	/// <summary>
-	/// @brief シーン名を定数で管理するクラス
+	/// @brief シーン名をstring型で管理するクラス
 	/// <summary>
-	public static class SceneNameList
+	public static class SceneNameString
 	{
 
 		public const string OnlineTitleScene = "OnlineTitleScene";
-		public const string OnlineMenuScene = "OnlineMenuScene";
+		public const string OnlineLobbyScene = "OnlineLobbyScene";
 		public const string OnlineMatchingScene = "OnlineMatchingScene";
 		public const string OnlineGameScene = "OnlineGameScene";
 
