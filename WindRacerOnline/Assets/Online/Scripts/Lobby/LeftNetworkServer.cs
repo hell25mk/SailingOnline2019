@@ -35,7 +35,7 @@ namespace Online.Lobby
         {
             base.OnDisconnected(cause);
 
-            sceneMove.SetMoveScene(eSceneList.Scene_OfflineMenu);
+            sceneMove.SetMoveScene(SceneNameEnum.OnlineTitleScene);
             sceneMove.SceneMove();
 
             Debug.Log("Photonサーバーから切断しました");

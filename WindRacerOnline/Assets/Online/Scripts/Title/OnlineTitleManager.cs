@@ -17,19 +17,6 @@ namespace Online.Title
         [SerializeField]
         private Text playerName;
         private const string DefaultPlayerName = "プレイヤー";
-        SceneMoveManager sceneMove;
-
-        public void Start()
-        {
-            sceneMove = GetComponent<SceneMoveManager>();
-        }
-
-        public void JoinOnlineLobby()
-        {
-            SetNickName();
-
-            sceneMove.SceneMove();
-        }
 
         /// <summary>
         /// @brief ニックネームを登録する
@@ -44,6 +31,9 @@ namespace Online.Title
             }
 
             PhotonNetwork.LocalPlayer.NickName = playerName.text;
+
+            Debug.Log("ニックネームを設定しました");
+
         }
 
     }

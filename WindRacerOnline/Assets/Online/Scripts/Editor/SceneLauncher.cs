@@ -15,6 +15,18 @@ namespace Online.Editor
         private const string SceneDirectoryName = "Assets/Online/Scenes/";
 
         /// <summary>
+        /// @brief 開いているシーンを保存してシーンを移動する
+        /// </summary>
+        /// <param name="str">移動したいシーンの文字列</param>
+        private static void Open(string str)
+        {
+
+            EditorSceneManager.SaveOpenScenes();
+            EditorSceneManager.OpenScene(CreateSceneDirectoryName(str), OpenSceneMode.Single);
+
+        }
+
+        /// <summary>
         /// @brief 開くシーンファイルのパスを作成し返す
         /// </summary>
         /// <param name="sceneName">開きたいシーンの名前</param>
@@ -37,7 +49,7 @@ namespace Online.Editor
         public static void OpenTitleScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineTitleScene), OpenSceneMode.Single);
+            Open(SceneNameString.OnlineTitleScene);
 
         }
 
@@ -48,7 +60,7 @@ namespace Online.Editor
         public static void OpenMenuScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineLobbyScene), OpenSceneMode.Single);
+            Open(SceneNameString.OnlineLobbyScene);
 
         }
 
@@ -59,7 +71,7 @@ namespace Online.Editor
         public static void OpenMatchingScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineMatchingScene), OpenSceneMode.Single);
+            Open(SceneNameString.OnlineMatchingScene);
 
         }
 
@@ -70,7 +82,7 @@ namespace Online.Editor
         public static void OpenGameScene()
         {
 
-            EditorSceneManager.OpenScene(CreateSceneDirectoryName(SceneNameString.OnlineGameScene), OpenSceneMode.Single);
+            Open(SceneNameString.OnlineGameScene);
 
         }
 

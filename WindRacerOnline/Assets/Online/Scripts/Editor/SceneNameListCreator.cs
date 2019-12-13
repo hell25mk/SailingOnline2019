@@ -37,10 +37,10 @@ namespace Online.Editor
         //プルダウンメニューにつける名前
         private const string MenuName = "Online/Create Scripts/Scene Name List";
         //ファイルパス
-        private const string FilePass = "Assets/Online/Scripts/Editor/Scene/SceneNameList.cs";
+        private const string FilePass = "Assets/Online/Scripts/Define/SceneNameList.cs";
 
         //作成するクラス名
-        //private const string ClassName_Enum = "SceneNameEnum";
+        private const string ClassName_Enum = "SceneNameEnum";
         private const string ClassName_String = "SceneNameString";
 
         //ファイル名（上が拡張子あり）
@@ -91,7 +91,7 @@ namespace Online.Editor
             #region Enum型の管理クラスを作成
 
             //クラス部分の挿入
-            /*builder.AppendLine("\t/// <summary>");
+            builder.AppendLine("\t/// <summary>");
             builder.AppendLine("\t/// @brief シーン名をEnum型で管理するクラス");
             builder.AppendLine("\t/// <summary>");
             builder.AppendFormat("\tpublic enum {0}", ClassName_Enum).AppendLine();
@@ -106,7 +106,7 @@ namespace Online.Editor
                 builder.Append("\t\t").AppendFormat(@"{0},", n.var).AppendLine();
             }
 
-            builder.AppendLine("\n\t}\n");*/
+            builder.AppendLine("\n\t}\n");
 
             #endregion
 

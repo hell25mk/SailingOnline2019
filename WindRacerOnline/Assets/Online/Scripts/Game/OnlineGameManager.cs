@@ -38,7 +38,7 @@ namespace Online.InRoom.GamePlay
             {
                 Debug.LogError("Photonに接続していません。タイトルに戻ります");
 
-                sceneManager.SetMoveScene(eSceneList.Scene_OfflineMenu);
+                sceneManager.SetMoveScene(SceneNameEnum.OnlineTitleScene);
                 sceneManager.SceneMove();
                 return;
             }
@@ -125,7 +125,7 @@ namespace Online.InRoom.GamePlay
             base.OnLeftRoom();
 
             //シーンを移動させる
-            sceneManager.SetMoveScene(eSceneList.Scene_OnlineMenu);
+            sceneManager.SetMoveScene(SceneNameEnum.OnlineLobbyScene);
             sceneManager.SceneMove();
 
         }
