@@ -11,7 +11,7 @@ using Photon.Pun;
 namespace Online.Title
 {
 
-    public class OnlineTitleManager : MonoBehaviour
+    public class OnlineTitleManager : BaseNetworkObject
     {
 
         [SerializeField]

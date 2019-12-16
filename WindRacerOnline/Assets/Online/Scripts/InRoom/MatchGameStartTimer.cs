@@ -8,10 +8,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-namespace Online.InRoom.Matching
+namespace Online.InRoom
 {
 
-    using CustomOption;
+    using InRoom;
 
     public class MatchGameStartTimer : MonoBehaviourPunCallbacks
     {

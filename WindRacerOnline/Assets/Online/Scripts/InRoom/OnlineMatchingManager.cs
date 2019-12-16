@@ -9,7 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-namespace Online.InRoom.Matching
+namespace Online.InRoom
 {
 
     public class OnlineMatchingManager : MonoBehaviourPunCallbacks

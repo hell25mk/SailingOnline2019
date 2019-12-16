@@ -14,10 +14,10 @@ using Photon.Pun.UtilityScripts;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using ExitGames.Client.Photon;
 
-namespace Online.InRoom.GamePlay
+namespace Online.InRoom
 {
 
-    using CustomOption;
+    using InRoom;
 
     public class OnlineGameManager : MonoBehaviourPunCallbacks
     {

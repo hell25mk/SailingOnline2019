@@ -11,7 +11,7 @@ using Photon.Realtime;
 namespace Online.Lobby
 {
 
-    public class OnlineLobbyManager : MonoBehaviourPunCallbacks
+    public class OnlineLobbyManager : BaseNetworkObject
     {
         private OnlineLobbyUIManager uiManager;
 
@@ -25,13 +25,7 @@ namespace Online.Lobby
         public void Awake()
         {
 
-            //ゲームバージョンを設定する
-            PhotonNetwork.GameVersion = "1.0.0";
-            //Photonに接続してない場合、PhotonServerSettingsに設定した内容を使用してマスターサーバーに接続
-            if (!PhotonNetwork.IsConnected)
-            {
-                PhotonNetwork.ConnectUsingSettings();
-            }
+            Connected("1.0.0");
 
         }
 
@@ -42,19 +36,6 @@ namespace Online.Lobby
         {
 
             PhotonNetwork.JoinRandomRoom();
-
-        }
-
-        /// <summary>
-        /// @brief ランダムな部屋の参加に失敗したときの処理
-        /// </summary>
-        /// <param name="returnCode"></param>
-        /// <param name="message"></param>
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            base.OnJoinRandomFailed(returnCode, message);
-
-            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum));
 
         }
 
@@ -76,19 +57,58 @@ namespace Online.Lobby
             //参加ルームIDを取得する
             string id = uiManager.RoomIDText.text.ToString();
 
-            //IDが正しくない場合の処理(InputFieldで数字のみに制限しているので文字数のみで判断)
+            //IDが正しくない場合、処理を終了する(InputFieldで数字のみに制限しているので文字数のみで判断)
             if (id.Length < RoomIDLength)
             {
                 Debug.LogWarning("IDが正しくありません");
                 return;
             }
 
-            //部屋が見つからなかったときの処理
+            //部屋が見つからなかったとき処理を終了する
             if (!PhotonNetwork.JoinRoom(id))
             {
                 Debug.LogWarning("部屋が見つかりませんでした");
                 return;
             }
+
+        }
+
+        /// <summary>
+        /// @brief ランダムなルームIDを生成する
+        /// </summary>
+        /// <returns>ランダムな部屋ID</returns>
+        public string CreateRandomRoomID()
+        {
+            //使用文字が変わっていいように新しく変数を作成
+            string list = StrListNumber;
+            char[] id = new char[RoomIDLength];
+
+            for (int index = 0; index < id.Length; index++)
+            {
+                int rand = Random.Range(0, list.Length - 1);
+                id[index] = list[rand];
+            }
+
+            //charをstringに変換させる
+            string roomID = new string(id);
+
+            Debug.Log("ルームID:" + roomID);
+
+            return roomID;
+        }
+
+        #region PhotonCallback
+
+        /// <summary>
+        /// @brief ランダムな部屋の参加に失敗したときの処理
+        /// </summary>
+        /// <param name="returnCode"></param>
+        /// <param name="message"></param>
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            base.OnJoinRandomFailed(returnCode, message);
+
+            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum));
 
         }
 
@@ -128,48 +148,7 @@ namespace Online.Lobby
             sceneMove.SceneMove();
         }
 
-        /// <summary>
-        /// @brief ランダムなルームIDを生成する
-        /// </summary>
-        /// <returns>ランダムな部屋ID</returns>
-        public string CreateRandomRoomID()
-        {
-            //使用文字が変わっていいように新しく変数を作成
-            string list = StrListNumber;
-            char[] id = new char[RoomIDLength];
-
-            for (int index = 0; index < id.Length; index++)
-            {
-                int rand = Random.Range(0, list.Length - 1);
-                id[index] = list[rand];
-            }
-
-            //charをstringに変換させる
-            string roomID = new string(id);
-
-            Debug.Log("ルームID:" + roomID);
-
-            return roomID;
-        }
-
-        /// <summary>
-        /// @brief 部屋オプションを作成する
-        /// </summary>
-        /// /// <param name="mP">部屋に入れる最大人数</param>
-        /// <param name="vis">部屋を公開するか</param>
-        /// <param name="open">部屋に入れるかどうか</param>
-        /// <returns>作成したオプション</returns>
-        public RoomOptions CreateRoomOption(byte mP = MaxPlayerNum, bool vis = true, bool open = true)
-        {
-            RoomOptions option = new RoomOptions
-            {
-                MaxPlayers = mP,
-                IsVisible = vis,
-                IsOpen = open
-            };
-
-            return option;
-        }
+        #endregion
 
     }
 
