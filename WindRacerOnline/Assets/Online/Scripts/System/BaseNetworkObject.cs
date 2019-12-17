@@ -20,8 +20,6 @@ namespace Online
         public void Start()
         {
 
-            PhotonNetwork.GameVersion = "1.0.0";
-
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace Online
         /// <param name="vis">部屋を公開するか</param>
         /// <param name="open">部屋に入れるかどうか</param>
         /// <returns>作成したオプション</returns>
-        public RoomOptions CreateRoomOption(byte mP, bool vis = true, bool open = true)
+        /*public RoomOptions CreateRoomOption(byte mP, bool vis = true, bool open = true)
         {
             RoomOptions option = new RoomOptions
             {
@@ -85,7 +83,7 @@ namespace Online
             };
 
             return option;
-        }
+        }*/
 
         /// <summary>
         /// @brief 新規の部屋を作成する

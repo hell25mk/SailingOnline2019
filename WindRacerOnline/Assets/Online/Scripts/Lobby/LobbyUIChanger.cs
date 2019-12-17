@@ -17,7 +17,7 @@ namespace Online.Lobby
         Menu_RoomSearch
     }
 
-    public class OnlineLobbyUIManager : MonoBehaviour
+    public class LobbyUIChanger : MonoBehaviour
     {
         [SerializeField]
         private GameObject mainMenuUI;              //MenuをまとめたUI
@@ -28,9 +28,7 @@ namespace Online.Lobby
 
         [SerializeField]
         private Text connectStateText;              //通信状態を表示するテキスト
-        [SerializeField]
-        private Text roomIDText;                    //ルームIDを表示するテキスト
-
+        
         public void Start()
         {
             subMenuStack = new Stack<GameObject>();
@@ -44,7 +42,6 @@ namespace Online.Lobby
             mainMenuUI.SetActive(true);
             firstSubMenuUI.SetActive(true);
             subMenuStack.Push(firstSubMenuUI);
-            mainMenuUI.SetActive(true);
             connectStateText.text = "オンラインモード";
         }
 
@@ -73,15 +70,6 @@ namespace Online.Lobby
             subMenuStack.Peek().SetActive(false);
             subMenuStack.Pop();
             subMenuStack.Peek().SetActive(true);
-        }
-
-
-        /// <summary>
-        /// @brief ルームIDのテキストのアクセサー
-        /// </summary>
-        public Text RoomIDText {
-            get { return roomIDText; }
-            set { roomIDText = value; }
         }
 
     }

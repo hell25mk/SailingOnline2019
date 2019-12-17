@@ -63,7 +63,7 @@ namespace Online.InRoom
 
             SpawnPlayer();
 
-            waitingText.text = "他の人を待っています";
+            //waitingText.text = "他の人を待っています";
 
             Hashtable props = new Hashtable { { CustomPropertyKey.PlayerLoadLevel, true } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);

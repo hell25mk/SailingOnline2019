@@ -1,19 +1,17 @@
-﻿/*
- * 長嶋
- */
-
+﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+using UnityEngine.UI;
 
 namespace Online.Lobby
 {
-
-    public class OnlineLobbyManager : BaseNetworkObject
+    public class RoomManager : BaseNetworkObject
     {
-        private OnlineLobbyUIManager uiManager;
+
+        [SerializeField]
+        private Text inRoomIDText;
 
         //部屋に入れる最大人数
         private const byte MaxPlayerNum = 8;
@@ -22,40 +20,39 @@ namespace Online.Lobby
         //ルームID生成用
         private const string StrListNumber = "0123456789";
 
-        public void Awake()
-        {
-
-            Connected("1.0.0");
-
-        }
+        #region ランダムマッチ
 
         /// <summary>
         /// @brief ランダムな部屋に参加する
         /// </summary>
-        public void RandomJoinRoom()
+        public void JoinRandomRoom()
         {
 
             PhotonNetwork.JoinRandomRoom();
 
         }
 
+        #endregion
+
+        #region 友達と遊ぶ
+
         /// <summary>
-        /// @brief 部屋を作成する
+        /// @brief 新規の部屋を作成する
         /// </summary>
-        public void CreateRoom()
+        public void CreateFriendRoom()
         {
 
-            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum, false));
+            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption());
 
         }
 
         /// <summary>
         /// @brief 部屋に参加する
         /// </summary>
-        public void JoinRoom()
+        public void JoinFriendRoom()
         {
             //参加ルームIDを取得する
-            string id = uiManager.RoomIDText.text.ToString();
+            string id = inRoomIDText.ToString();
 
             //IDが正しくない場合、処理を終了する(InputFieldで数字のみに制限しているので文字数のみで判断)
             if (id.Length < RoomIDLength)
@@ -72,6 +69,8 @@ namespace Online.Lobby
             }
 
         }
+
+        #endregion
 
         /// <summary>
         /// @brief ランダムなルームIDを生成する
@@ -97,7 +96,26 @@ namespace Online.Lobby
             return roomID;
         }
 
-        #region PhotonCallback
+        /// <summary>
+        /// @brief 部屋オプションを作成する
+        /// </summary>
+        /// /// <param name="mP">部屋に入れる最大人数</param>
+        /// <param name="vis">部屋を公開するか</param>
+        /// <param name="open">部屋に入れるかどうか</param>
+        /// <returns>作成したオプション</returns>
+        public RoomOptions CreateRoomOption(byte mP = MaxPlayerNum, bool vis = true, bool open = true)
+        {
+            RoomOptions option = new RoomOptions
+            {
+                MaxPlayers = mP,
+                IsVisible = vis,
+                IsOpen = open
+            };
+
+            return option;
+        }
+
+        #region PhotonCollBack
 
         /// <summary>
         /// @brief ランダムな部屋の参加に失敗したときの処理
@@ -123,32 +141,9 @@ namespace Online.Lobby
 
         }
 
-        /// <summary>
-        /// @brief サーバーへ接続成功したときの処理
-        /// </summary>
-        public override void OnConnectedToMaster()
-        {
-            base.OnConnectedToMaster();
-
-            uiManager = GetComponent<OnlineLobbyUIManager>();
-            uiManager.Init();
-
-        }
-
-        /// <summary>
-        /// @brief マッチングが成功したときの処理
-        /// </summary>
-        public override void OnJoinedRoom()
-        {
-            //メッセージ処理の実行を一時停止
-            PhotonNetwork.IsMessageQueueRunning = false;
-
-            //シーンを移動させる
-            SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
-            sceneMove.SceneMove();
-        }
-
         #endregion
+
+
 
     }
 
