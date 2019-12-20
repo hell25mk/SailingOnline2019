@@ -1,4 +1,10 @@
-﻿using Photon.Pun;
+﻿/*
+ * 
+ * 長嶋
+ * 
+ */
+
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +48,7 @@ namespace Online.Lobby
         public void CreateFriendRoom()
         {
 
-            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption());
+            PhotonNetwork.CreateRoom(CreateRandomRoomID(), CreateRoomOption(MaxPlayerNum));
 
         }
 
@@ -99,7 +105,7 @@ namespace Online.Lobby
         /// <summary>
         /// @brief 部屋オプションを作成する
         /// </summary>
-        /// /// <param name="mP">部屋に入れる最大人数</param>
+        /// <param name="mP">部屋に入れる最大人数</param>
         /// <param name="vis">部屋を公開するか</param>
         /// <param name="open">部屋に入れるかどうか</param>
         /// <returns>作成したオプション</returns>
@@ -113,6 +119,21 @@ namespace Online.Lobby
             };
 
             return option;
+        }
+
+        /// <summary>
+        /// @brief 現在入室しているルームから退室する
+        /// </summary>
+        public void LeaveRoom()
+        {
+
+            if (!PhotonNetwork.InRoom)
+            {
+                return;
+            }
+
+            PhotonNetwork.LeaveRoom();
+
         }
 
         #region PhotonCollBack
@@ -142,8 +163,6 @@ namespace Online.Lobby
         }
 
         #endregion
-
-
 
     }
 

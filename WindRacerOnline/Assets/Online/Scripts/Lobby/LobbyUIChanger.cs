@@ -10,13 +10,6 @@ using UnityEngine.UI;
 namespace Online.Lobby
 {
 
-    public enum eOnlineMenuUI : byte
-    {
-        Menu_Select = 0,
-        Menu_Friend,
-        Menu_RoomSearch
-    }
-
     public class LobbyUIChanger : MonoBehaviour
     {
         [SerializeField]
@@ -31,7 +24,9 @@ namespace Online.Lobby
         
         public void Start()
         {
+
             subMenuStack = new Stack<GameObject>();
+
         }
 
         /// <summary>
@@ -39,10 +34,12 @@ namespace Online.Lobby
         /// </summary>
         public void Init()
         {
+
             mainMenuUI.SetActive(true);
             firstSubMenuUI.SetActive(true);
             subMenuStack.Push(firstSubMenuUI);
             connectStateText.text = "オンラインモード";
+
         }
 
         /// <summary>
@@ -50,9 +47,11 @@ namespace Online.Lobby
         /// </summary>
         public void PuchNextUI(GameObject obj)
         {
+
             subMenuStack.Peek().SetActive(false);
             subMenuStack.Push(obj);
             subMenuStack.Peek().SetActive(true);
+
         }
 
         /// <summary>
@@ -60,16 +59,11 @@ namespace Online.Lobby
         /// </summary>
         public void PopPreviousUI()
         {
-            if (subMenuStack.Count == 1)
-            {
-                LeftNetworkServer network = GetComponent<LeftNetworkServer>();
-                network.Disconnect();
-                return;
-            }
 
             subMenuStack.Peek().SetActive(false);
             subMenuStack.Pop();
             subMenuStack.Peek().SetActive(true);
+
         }
 
     }

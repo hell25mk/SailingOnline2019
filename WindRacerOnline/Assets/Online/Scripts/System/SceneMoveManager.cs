@@ -11,12 +11,23 @@ public class SceneMoveManager : MonoBehaviour
 
     public void SceneMove()
     {
+
         SceneManager.LoadScene((int)moveScene);
+
+    }
+
+    public void SceneMove(SceneNameEnum scene)
+    {
+
+        SceneManager.LoadScene((int)scene);
+
     }
 
     public void SetMoveScene(SceneNameEnum scene)
     {
+
         moveScene = scene;
+
     }
 
 }

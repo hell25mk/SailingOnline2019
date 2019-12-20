@@ -16,13 +16,6 @@ namespace Online.Lobby
 
         private LobbyUIChanger uiManager;
 
-        //部屋に入れる最大人数
-        private const byte MaxPlayerNum = 8;
-        //ルームIDの桁数
-        private const byte RoomIDLength = 5;
-        //ルームID生成用
-        private const string StrListNumber = "0123456789";
-
         public void Awake()
         {
 
@@ -33,7 +26,7 @@ namespace Online.Lobby
         #region PhotonCallback
 
         /// <summary>
-        /// @brief サーバーへ接続成功したときの処理
+        /// @brief サーバーへ接続成功したとき、UIを初期化する
         /// </summary>
         public override void OnConnectedToMaster()
         {
@@ -41,6 +34,8 @@ namespace Online.Lobby
 
             uiManager = GetComponent<LobbyUIChanger>();
             uiManager.Init();
+
+            Debug.Log("サーバーへの接続に成功しました");
 
         }
 
@@ -55,6 +50,9 @@ namespace Online.Lobby
             //シーンを移動させる
             SceneMoveManager sceneMove = GetComponent<SceneMoveManager>();
             sceneMove.SceneMove();
+
+            Debug.Log("部屋の入室に成功しました");
+
         }
 
         #endregion

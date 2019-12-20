@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224443562373348872}
   m_Layer: 5
-  m_Name: PlayerIcon
+  m_Name: Online PlayerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,9 +10,7 @@ namespace Online.DebugPlay
         public void Awake()
         {
 
-            if (CheckConnected()){
-
-            }
+            
 
         }
 

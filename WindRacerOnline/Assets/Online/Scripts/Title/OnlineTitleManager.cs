@@ -23,6 +23,7 @@ namespace Online.Title
         /// </summary>
         public void SetNickName()
         {
+
             //名前が付けられていない場合はデフォルト値を設定する
             if (playerName.text == "")
             {
