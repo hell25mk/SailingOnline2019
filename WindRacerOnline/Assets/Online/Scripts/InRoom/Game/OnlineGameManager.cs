@@ -1,9 +1,11 @@
 ﻿/*
- 長嶋
+ * 
+ * 長嶋
+ * Photonのデモを参考に作成
+ * 
  */
 
 using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,14 +14,10 @@ using Photon.Pun;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-using ExitGames.Client.Photon;
 
 namespace Online.InRoom
 {
-
-    using InRoom;
-
-    public class OnlineGameManager : MonoBehaviourPunCallbacks
+    public class OnlineGameManager : BaseNetworkObject
     {
         [SerializeField]
         private SceneMoveManager sceneManager;
@@ -131,7 +129,7 @@ namespace Online.InRoom
         }
 
         /// <summary>
-        /// @brief 各プレイヤーのロードレベルプロパティを更新する
+        /// @brief 各プレイヤーの読み込みレベルプロパティを更新する
         /// </summary>
         /// <param name="targetPlayer"></param>
         /// <param name="changedProps"></param>

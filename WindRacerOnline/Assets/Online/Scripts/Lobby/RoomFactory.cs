@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 namespace Online.Lobby
 {
-    public class RoomManager : BaseNetworkObject
+    public class RoomFactory : BaseNetworkObject
     {
 
         [SerializeField]

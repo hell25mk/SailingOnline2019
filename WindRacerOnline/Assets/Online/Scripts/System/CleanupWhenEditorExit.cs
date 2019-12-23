@@ -15,7 +15,7 @@ using Photon.Pun;
 namespace Online.Editor
 {
 
-    public class ExitPhotonSafely : BaseNetworkObject
+    public class CleanupWhenEditorExit : BaseNetworkObject
     {
 
 #if UNITY_EDITOR
